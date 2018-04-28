@@ -57,7 +57,7 @@ scrollIntoView(node, {
   // Your scroll actions will always be an array, even if there is nothing to scroll
   behavior: actions =>
     // list is sorted from innermost (closest parent to your target) to outermost (often the document.body or viewport)
-    scrollActions.forEach(({ el, top, left }) => {
+    actions.forEach(({ el, top, left }) => {
       // implement the scroll anyway you want
       el.scrollTop = top
       el.scrollLeft = left
