@@ -10,9 +10,9 @@
     "url":
       "git+https://github.com/stipsan/smooth-scroll-into-view-if-needed.git"
   },
-  "version": "1.0.1-alpha.2",
+  "version": "1.0.1-alpha.3",
   "main": "index.js",
-  "files": ["es", "umd"],
+  "files": ["es", "typings", "umd"],
   "scripts": {
     "prebuild": "yarn clean",
     "build":
