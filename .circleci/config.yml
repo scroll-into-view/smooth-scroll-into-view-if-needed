@@ -1,0 +1,73 @@
+
+aliases:
+  - &restore-cache
+    keys:
+      - v1-dependencies-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      # Fallback in case checksum fails
+      - v1-dependencies-{{ .Branch }}-
+
+  - &install
+    run: yarn --no-progress
+
+  - &save-cache
+    paths:
+      - node_modules
+    key: v1-dependencies-{{ .Branch }}-{{ checksum "yarn.lock" }}
+
+  - &cypress-dependencies-install
+    run:
+      name: Install Cypress dependencies
+      command: sudo apt-get install xvfb libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
+
+version: 2
+jobs:
+  Typecheck:
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - restore-cache: *restore-cache
+      - *install
+      - run: yarn typecheck
+
+  Build:
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - restore-cache: *restore-cache
+      - *install
+      - run: yarn build
+      - save-cache: *save-cache
+
+  Semantic Release:
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - restore-cache: *restore-cache
+      - *install
+      #- run:
+      #    name: scroll-into-view-if-needed
+      #    command: npx --no-install semantic-release -e semantic-release-monorepo
+      #    working_directory: packages/scroll-into-view-if-needed
+      #- run:
+      #    name: smooth-scroll-into-view-if-needed
+      #    command: npx --no-install semantic-release -e semantic-release-monorepo
+      #    working_directory: packages/smooth-scroll-into-view-if-needed
+
+# Workflows enables us to run multiple jobs in parallel
+workflows:
+  version: 2
+  Build and Deploy:
+    jobs:
+      - Typecheck
+      - Build
+      - Semantic Release:
+          requires:
+            - Typecheck
+            - Build
+          filters:
+            branches:
+              only:
+                - master
