@@ -4,15 +4,15 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
 ![smooth-scroll-into-view-if-needed](https://user-images.githubusercontent.com/81981/39338604-0bff23f2-49c4-11e8-9929-2f2b74a67b3c.png)
 
-This is a [ponyfill](https://ponyfill.com) for smooth scrolling
-`scroll-into-view-if-needed`.
+This is an addon to [`scroll-into-view-if-needed`](https://www.npmjs.com/package/scroll-into-view-if-needed) that [ponyfills](https://ponyfill.com) smooth scrolling.
+.
 
 ## [Demo](https://scroll-into-view-if-needed.netlify.com/)
 
 ## Install
 
 ```bash
-yarn add smooth-scroll-into-view-if-needed
+yarn add smooth-scroll-into-view-if-needed scroll-into-view-if-needed
 ```
 
 ## Usage
@@ -45,7 +45,7 @@ const sequence = async () => {
 ### Custom scrolling transition
 
 If the default smooth scrolling ponyfill isn't the duration or easing you want,
-you can provide your own scrolling logic by giving `behavior` a callback.
+you can provide your own scrolling logic by giving `behavior` a callback (this is actually a `scroll-into-view-if-needed` feature, if this is what you're after then you might need this package).
 
 ```js
 import scrollIntoView from 'smooth-scroll-into-view-if-needed'
@@ -53,16 +53,16 @@ const node = document.getElementById('hero')
 
 scrollIntoView(node, {
   // Your scroll actions will always be an array, even if there is nothing to scroll
-  behavior: scrollActions =>
+  behavior: actions =>
     // list is sorted from innermost (closest parent to your target) to outermost (often the document.body or viewport)
-    scrollActions.forEach(([el, scrollTop, scrollLeft]) => {
+    scrollActions.forEach(({ el, top, left }) => {
       // implement the scroll anyway you want
-      el.scrollTop = scrollTop
-      el.scrollLeft = scrollLeft
+      el.scrollTop = top
+      el.scrollLeft = left
 
       // If you need the relative scroll coordinates, for things like window.scrollBy style logic, just do the math
-      const offsetTop = el.scrollTop - scrollTop
-      const offsetLeft = el.scrollLeft - scrollLeft
+      const offsetTop = el.scrollTop - top
+      const offsetLeft = el.scrollLeft - left
     }),
   // all the other options (scrollMode, block, inline) still work, so you don't need to reimplement them (unless you really really want to)
 })
