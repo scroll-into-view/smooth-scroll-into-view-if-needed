@@ -6,7 +6,7 @@
 
 This is an addon to [`scroll-into-view-if-needed`](https://www.npmjs.com/package/scroll-into-view-if-needed) that [ponyfills](https://ponyfill.com) smooth scrolling.
 
-# This package requires v2 of `scroll-into-view-if-needed`, currently in alpha
+### This package requires v2 of `scroll-into-view-if-needed`, currently in alpha
 
 
 ## [Demo](https://scroll-into-view-if-needed.netlify.com/)
