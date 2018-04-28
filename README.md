@@ -5,14 +5,16 @@
 ![smooth-scroll-into-view-if-needed](https://user-images.githubusercontent.com/81981/39338604-0bff23f2-49c4-11e8-9929-2f2b74a67b3c.png)
 
 This is an addon to [`scroll-into-view-if-needed`](https://www.npmjs.com/package/scroll-into-view-if-needed) that [ponyfills](https://ponyfill.com) smooth scrolling.
-.
+
+# This package requires v2 of `scroll-into-view-if-needed`, currently in alpha
+
 
 ## [Demo](https://scroll-into-view-if-needed.netlify.com/)
 
 ## Install
 
 ```bash
-yarn add smooth-scroll-into-view-if-needed scroll-into-view-if-needed
+yarn add smooth-scroll-into-view-if-needed scroll-into-view-if-needed@next
 ```
 
 ## Usage
