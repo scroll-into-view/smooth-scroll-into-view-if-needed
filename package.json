@@ -31,7 +31,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "scroll-into-view-if-needed": "^2.0.1-alpha.0"
+    "scroll-into-view-if-needed": "^2.1.1"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.46",
@@ -42,14 +42,12 @@
     "babel-eslint": "8.2.3",
     "babel-plugin-add-module-exports": "0.2.1",
     "babel-plugin-dev-expression": "0.2.1",
-    "babel-plugin-styled-components": "1.5.1",
     "concurrently": "3.5.1",
     "eslint": "4.19.1",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-import": "2.11.0",
     "eslint-plugin-react": "7.7.0",
     "husky": "0.14.3",
-    "lerna": "2.11.0",
     "lint-staged": "7.0.5",
     "prettier": "1.12.1",
     "prettier-package-json": "1.5.1",
@@ -62,7 +60,6 @@
     "rollup-plugin-uglify": "3.0.0",
     "scroll-into-view-if-needed": "2.1.1",
     "semantic-release": "15.1.7",
-    "semantic-release-monorepo": "6.0.1",
     "typescript": "2.8.3"
   },
   "keywords": [
@@ -106,8 +103,7 @@
     ]
   },
   "release": {
-    "prepare": ["@semantic-release/npm"],
-    "verifyConditions": ["@semantic-release/npm", "@semantic-release/github"]
+    "prepare": ["@semantic-release/npm"]
   },
   "sideEffects": false,
   "typings": "typings/index.d.ts"
