@@ -1,13 +1,15 @@
 [![CircleCI Status](https://img.shields.io/circleci/project/github/stipsan/smooth-scroll-into-view-if-needed.svg?style=flat-square)](https://circleci.com/gh/stipsan/smooth-scroll-into-view-if-needed)
 [![npm stat](https://img.shields.io/npm/dm/smooth-scroll-into-view-if-needed.svg?style=flat-square)](https://npm-stat.com/charts.html?package=smooth-scroll-into-view-if-needed)
 [![npm version](https://img.shields.io/npm/v/smooth-scroll-into-view-if-needed.svg?style=flat-square)](https://www.npmjs.com/package/smooth-scroll-into-view-if-needed)
+[![gzip size][gzip-badge]][unpkg-dist]
+[![size][size-badge]][unpkg-dist]
+[![module formats: umd, cjs, and es][module-formats-badge]][unpkg-dist]
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
 ![smooth-scroll-into-view-if-needed](https://user-images.githubusercontent.com/81981/39338604-0bff23f2-49c4-11e8-9929-2f2b74a67b3c.png)
 
 This is an addon to [`scroll-into-view-if-needed`](https://www.npmjs.com/package/scroll-into-view-if-needed) that [ponyfills](https://ponyfill.com) smooth scrolling.
 
 ### This package requires v2 of `scroll-into-view-if-needed`, currently in prerelease
-
 
 ## [Demo](https://scroll-into-view-if-needed.netlify.com/)
 
@@ -44,30 +46,13 @@ const sequence = async () => {
 }
 ```
 
-### Custom scrolling transition
+## Credits
 
-If the default smooth scrolling ponyfill isn't the duration or easing you want,
-you can provide your own scrolling logic by giving `behavior` a callback (this is actually a `scroll-into-view-if-needed` feature, if this is what you're after then you might need this package).
+* [smoothscroll](https://github.com/iamdustan/smoothscroll) for the reference implementation of smooth scrolling.
 
-```js
-import scrollIntoView from 'smooth-scroll-into-view-if-needed'
-const node = document.getElementById('hero')
+## More documentation will be added
 
-scrollIntoView(node, {
-  // Your scroll actions will always be an array, even if there is nothing to scroll
-  behavior: actions =>
-    // list is sorted from innermost (closest parent to your target) to outermost (often the document.body or viewport)
-    actions.forEach(({ el, top, left }) => {
-      // implement the scroll anyway you want
-      el.scrollTop = top
-      el.scrollLeft = left
-
-      // If you need the relative scroll coordinates, for things like window.scrollBy style logic, just do the math
-      const offsetTop = el.scrollTop - top
-      const offsetLeft = el.scrollLeft - left
-    }),
-  // all the other options (scrollMode, block, inline) still work, so you don't need to reimplement them (unless you really really want to)
-})
-```
-
-## More documentation will be added (hang in there)
+[gzip-badge]: http://img.badgesize.io/https://unpkg.com/smooth-scroll-into-view-if-needed/umd/smooth-scroll-into-view-if-needed.min.js?compression=gzip&label=gzip%20size&style=flat-square
+[size-badge]: http://img.badgesize.io/https://unpkg.com/smooth-scroll-into-view-if-needed/umd/smooth-scroll-into-view-if-needed.min.js?label=size&style=flat-square
+[unpkg-dist]: https://unpkg.com/smooth-scroll-into-view-if-needed/umd/
+[module-formats-badge]: https://img.shields.io/badge/module%20formats-umd%2C%20cjs%2C%20es-green.svg?style=flat-square
