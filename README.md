@@ -46,6 +46,10 @@ const sequence = async () => {
 }
 ```
 
+## Credits
+
+* [smoothscroll](https://github.com/iamdustan/smoothscroll) for the reference implementation of smooth scrolling.
+
 ## More documentation will be added
 
 [gzip-badge]: http://img.badgesize.io/https://unpkg.com/smooth-scroll-into-view-if-needed/umd/smooth-scroll-into-view-if-needed.min.js?compression=gzip&label=gzip%20size&style=flat-square
