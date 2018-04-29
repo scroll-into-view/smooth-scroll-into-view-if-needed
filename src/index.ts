@@ -49,7 +49,7 @@ function smoothScroll(el, x, y, cb) {
   var startTime = now()
 
   // define scroll context
-  if (el === document.body || (el === document.documentElement && true)) {
+  if (el === document.documentElement) {
     scrollable = window
     startX = window.scrollX || window.pageXOffset
     startY = window.scrollY || window.pageYOffset
@@ -79,7 +79,6 @@ function smoothScroll(el, x, y, cb) {
 
 export default (target, options: Options = {}) => {
   const { behavior = 'smooth' } = options
-  //return target.scrollIntoView(options)
 
   // @TODO detect if someone is using this library without smooth behavior and maybe warn
   if (behavior !== 'smooth') {
@@ -88,14 +87,12 @@ export default (target, options: Options = {}) => {
 
   return scrollIntoView(target, {
     ...options,
-    behavior: instructions => {
-      return Promise.all(
-        instructions.map(({ el, left, top }) => {
-          return new Promise(resolve => {
-            smoothScroll(el, left, top, () => resolve())
-          })
-        })
-      )
-    },
+    behavior: actions =>
+      Promise.all(
+        actions.map(
+          ({ el, left, top }) =>
+            new Promise(resolve => smoothScroll(el, left, top, () => resolve()))
+        )
+      ),
   })
 }
