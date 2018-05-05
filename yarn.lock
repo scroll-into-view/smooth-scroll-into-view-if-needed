@@ -4396,9 +4396,9 @@ scroll-into-view-if-needed@2.1.5:
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-2.1.5.tgz#0ded69275e0172c71f523722d497aef44f6c6bad"
 
-semantic-release@15.2.0:
-  version "15.2.0"
-  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-15.2.0.tgz#3f0177a5ac71fe78d88d3ed8afe41414b3d015b9"
+semantic-release@15.3.0:
+  version "15.3.0"
+  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-15.3.0.tgz#eedf12ca5d0e1bd8925e61440a7e5e19632292d1"
   dependencies:
     "@semantic-release/commit-analyzer" "^5.0.0"
     "@semantic-release/error" "^2.2.0"
