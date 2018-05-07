@@ -101,6 +101,8 @@ scrollIntoView(node, {
 })
 ```
 
+Here's more examples, like easeInCubic etc: https://gist.github.com/gre/1650294#file-easing-js
+
 ## Credits
 
 * [smoothscroll](https://github.com/iamdustan/smoothscroll) for the reference implementation of smooth scrolling.
