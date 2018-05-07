@@ -15,7 +15,7 @@ export interface SmoothBehaviorOptions extends Options {
 
 // Memoize so we're much more friendly to non-dom envs
 let memoizedNow
-var now = () => {
+const now = () => {
   if (!memoizedNow) {
     memoizedNow =
       'performance' in window ? performance.now.bind(performance) : Date.now
@@ -24,26 +24,20 @@ var now = () => {
 }
 
 function step(context) {
-  var time = now()
-  var value
-  var currentX
-  var currentY
-  var elapsed = (time - context.startTime) / context.duration
-
-  // avoid elapsed times higher than one
-  elapsed = elapsed > 1 ? 1 : elapsed
+  const time = now()
+  const elapsed = Math.min((time - context.startTime) / context.duration, 1)
 
   // apply easing to elapsed time
-  value = context.ease(elapsed)
+  const value = context.ease(elapsed)
 
-  currentX = context.startX + (context.x - context.startX) * value
-  currentY = context.startY + (context.y - context.startY) * value
+  const currentX = context.startX + (context.x - context.startX) * value
+  const currentY = context.startY + (context.y - context.startY) * value
 
-  context.method.call(context.scrollable, currentX, currentY)
+  context.method(currentX, currentY)
 
   // scroll more if we have not reached our destination
   if (currentX !== context.x || currentY !== context.y) {
-    requestAnimationFrame(step.bind(global, context))
+    requestAnimationFrame(() => step(context))
   }
 }
 
@@ -55,23 +49,23 @@ function smoothScroll(
   ease = t => 0.5 * (1 - Math.cos(Math.PI * t)),
   cb
 ) {
-  var scrollable
-  var startX
-  var startY
-  var method
-  var startTime = now()
+  let scrollable
+  let startX
+  let startY
+  let method
 
   // define scroll context
   if (el === document.documentElement) {
     scrollable = window
     startX = window.scrollX || window.pageXOffset
     startY = window.scrollY || window.pageYOffset
-    method = window.scroll
+    method = (x, y) => window.scroll(x, y)
   } else {
     scrollable = el
     startX = el.scrollLeft
     startY = el.scrollTop
     method = (x, y) => {
+      // @TODO use Element.scroll if it exists, as it is potentially better performing
       el.scrollLeft = x
       el.scrollTop = y
     }
@@ -81,7 +75,7 @@ function smoothScroll(
   step({
     scrollable: scrollable,
     method: method,
-    startTime: startTime,
+    startTime: now(),
     startX: startX,
     startY: startY,
     x: x,
