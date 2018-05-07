@@ -12,6 +12,7 @@
   },
   "version": "1.0.1-alpha.3",
   "main": "index.js",
+  "module": "es/index.js",
   "files": ["es", "typings", "umd"],
   "scripts": {
     "prebuild": "yarn clean",
@@ -31,7 +32,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "scroll-into-view-if-needed": "^2.1.1"
+    "scroll-into-view-if-needed": ">=2.1.6"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.46",
@@ -79,6 +80,16 @@
   "browserify": {
     "transform": ["loose-envify"]
   },
+  "bundlesize": [
+    {
+      "path": "./umd/smooth-scroll-into-view-if-needed.min.js",
+      "maxSize": "2 kB"
+    },
+    {
+      "path": "./umd/smooth-scroll-into-view-if-needed.js",
+      "maxSize": "3.5 kB"
+    }
+  ],
   "lint-staged": {
     "*.js": ["prettier --write", "git add"],
     "*.{ts,tsx}": ["prettier --write", "git add"],
@@ -88,7 +99,6 @@
     "**/package.json": ["prettier-package-json --write", "git add"],
     "**/.babelrc": ["prettier --write", "git add"]
   },
-  "module": "es/index.js",
   "prettier": {
     "semi": false,
     "singleQuote": true,

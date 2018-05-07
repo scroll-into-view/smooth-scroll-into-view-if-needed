@@ -1,9 +1,21 @@
-import scrollIntoView from 'scroll-into-view-if-needed'
-import { Options } from 'scroll-into-view-if-needed/compute'
+import scrollIntoView, {
+  Options,
+  StandardBehaviorOptions,
+  CustomBehaviorOptions,
+} from 'scroll-into-view-if-needed'
+
+export interface CustomEasing {
+  (t: number): number
+}
+export interface SmoothBehaviorOptions extends Options {
+  behavior?: 'smooth'
+  duration?: number
+  ease?: CustomEasing
+}
 
 // Memoize so we're much more friendly to non-dom envs
 let memoizedNow
-var now = () => {
+const now = () => {
   if (!memoizedNow) {
     memoizedNow =
       'performance' in window ? performance.now.bind(performance) : Date.now
@@ -11,54 +23,49 @@ var now = () => {
   return memoizedNow()
 }
 
-const SCROLL_TIME = 300
-
-function ease(k) {
-  return 0.5 * (1 - Math.cos(Math.PI * k))
-}
-
 function step(context) {
-  var time = now()
-  var value
-  var currentX
-  var currentY
-  var elapsed = (time - context.startTime) / SCROLL_TIME
-
-  // avoid elapsed times higher than one
-  elapsed = elapsed > 1 ? 1 : elapsed
+  const time = now()
+  const elapsed = Math.min((time - context.startTime) / context.duration, 1)
 
   // apply easing to elapsed time
-  value = ease(elapsed)
+  const value = context.ease(elapsed)
 
-  currentX = context.startX + (context.x - context.startX) * value
-  currentY = context.startY + (context.y - context.startY) * value
+  const currentX = context.startX + (context.x - context.startX) * value
+  const currentY = context.startY + (context.y - context.startY) * value
 
-  context.method.call(context.scrollable, currentX, currentY)
+  context.method(currentX, currentY)
 
   // scroll more if we have not reached our destination
   if (currentX !== context.x || currentY !== context.y) {
-    requestAnimationFrame(step.bind(global, context))
+    requestAnimationFrame(() => step(context))
   }
 }
 
-function smoothScroll(el, x, y, cb) {
-  var scrollable
-  var startX
-  var startY
-  var method
-  var startTime = now()
+function smoothScroll(
+  el,
+  x,
+  y,
+  duration = 300,
+  ease = t => 0.5 * (1 - Math.cos(Math.PI * t)),
+  cb
+) {
+  let scrollable
+  let startX
+  let startY
+  let method
 
   // define scroll context
   if (el === document.documentElement) {
     scrollable = window
     startX = window.scrollX || window.pageXOffset
     startY = window.scrollY || window.pageYOffset
-    method = window.scroll
+    method = (x, y) => window.scroll(x, y)
   } else {
     scrollable = el
     startX = el.scrollLeft
     startY = el.scrollTop
     method = (x, y) => {
+      // @TODO use Element.scroll if it exists, as it is potentially better performing
       el.scrollLeft = x
       el.scrollTop = y
     }
@@ -68,31 +75,58 @@ function smoothScroll(el, x, y, cb) {
   step({
     scrollable: scrollable,
     method: method,
-    startTime: startTime,
+    startTime: now(),
     startX: startX,
     startY: startY,
     x: x,
     y: y,
+    duration,
+    ease,
     cb,
   })
 }
 
-export default (target, options: Options = {}) => {
-  const { behavior = 'smooth' } = options
+const shouldSmoothScroll = <T>(options: any): options is T => {
+  return (options && !options.behavior) || options.behavior === 'smooth'
+}
 
-  // @TODO detect if someone is using this library without smooth behavior and maybe warn
-  if (behavior !== 'smooth') {
-    return scrollIntoView(target, options)
+function scroll(target: Element, options?: SmoothBehaviorOptions): Promise<any>
+function scroll<T>(target: Element, options: CustomBehaviorOptions<T>): T
+function scroll(target: Element, options: StandardBehaviorOptions): void
+function scroll<T>(target, options) {
+  if (shouldSmoothScroll<SmoothBehaviorOptions>(options)) {
+    const overrides = options || {}
+    // @TODO replace <any> in promise signatures with better information
+    return scrollIntoView<Promise<any>>(target, {
+      block: overrides.block,
+      inline: overrides.inline,
+      scrollMode: overrides.scrollMode,
+      boundary: overrides.boundary,
+      behavior: actions =>
+        Promise.all(
+          actions.map(
+            ({ el, left, top }) =>
+              new Promise(resolve =>
+                smoothScroll(
+                  el,
+                  left,
+                  top,
+                  overrides.duration,
+                  overrides.ease,
+                  () => resolve()
+                )
+              )
+          )
+        ),
+    })
   }
 
-  return scrollIntoView(target, {
-    ...options,
-    behavior: actions =>
-      Promise.all(
-        actions.map(
-          ({ el, left, top }) =>
-            new Promise(resolve => smoothScroll(el, left, top, () => resolve()))
-        )
-      ),
-  })
+  // @TODO maybe warn when someone could be using this library this way unintentionally
+
+  return scrollIntoView<T>(target, options)
 }
+
+// re-assign here makes the flowtype generation work
+const smoothScrollIntoView = scroll
+
+export default smoothScrollIntoView
