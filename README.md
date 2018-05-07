@@ -8,6 +8,7 @@
 ![smooth-scroll-into-view-if-needed](https://user-images.githubusercontent.com/81981/39496447-c1153942-4d9e-11e8-92c8-ad5ac0e406ac.png)
 
 This is an addon to [`scroll-into-view-if-needed`](https://www.npmjs.com/package/scroll-into-view-if-needed) that [ponyfills](https://ponyfill.com) smooth scrolling.
+And while `scroll-into-view-if-needed` use the same default options as browsers and the spec does, this library is a bit more opinionated and include bonus features that help you build great UIs.
 
 ## [Demo](https://scroll-into-view-if-needed.netlify.com/)
 
@@ -23,18 +24,17 @@ yarn add smooth-scroll-into-view-if-needed scroll-into-view-if-needed
 import scrollIntoView from 'smooth-scroll-into-view-if-needed'
 const node = document.getElementById('hero')
 
-// If all you want is for all your users to have stuff smooth scroll into view
-scrollIntoView(node, { behavior: 'smooth' })
+// `options.behavior` is set to `smooth` by default so you don't have to pass options like in `scroll-into-view-if-needed`
+scrollIntoView(node)
 
-// combine it with any of the other options
+// combine it with any of the other options from 'scroll-into-view-if-needed'
 scrollIntoView(node, {
-  behavior: 'smooth',
   scrollMode: 'if-needed',
   block: 'nearest',
   inline: 'nearest',
 })
 
-// It returns a promise that is resolved when the animation is finished
+// a promise is always returned to help reduce boilerplate
 const sequence = async () => {
   const slide = document.getElementById('slide-3')
   // First smooth scroll to hero
@@ -42,6 +42,63 @@ const sequence = async () => {
   // Then we scroll to a slide in a slideshow
   return scrollIntoView(slide, { behavior: 'smooth' })
 }
+```
+
+## Polyfills
+
+This library rely on `Promise` and `requestAnimationFrame`. This library does not ship with polyfills for these to keep bundlesizes as low as possible.
+
+## API
+
+Check the full API in [`scroll-into-view-if-needed`](https://github.com/stipsan/scroll-into-view-if-needed#api).
+
+This library differs from the API in `scroll-into-view-if-needed` in the following ways:
+
+* the second argument can't be a boolean, it must be either undefined or an object.
+
+### scrollIntoView(target, [options]) => Promise
+
+`scroll-into-view-if-needed` does not return anything, while this library will return a Promise that is resolved when all of the scrolling boxes are finished scrolling.
+
+> The ability to cancel animations will be added in a future version.
+
+### options
+
+Type: `Object`
+
+#### behavior
+
+Type: `'auto' | 'smooth' | 'instant' | Function`<br> Default: `'smooth'`
+
+This option deviates from `scroll-into-view-if-needed` in two ways.
+
+* The default value is `smooth` instead of `auto`
+* Using `smooth` adds it to browsers that miss it, and overrides the native smooth scrolling in the browsers that have it to ensure the scrolling is consistent in any browser.
+
+#### duration
+
+Type: `number`<br> Default: `300`
+
+> Introduced in `v1.1.0`
+
+This setting is not a hard limit.
+The duration of a scroll differs depending on how many elements is scrolled, and the capabilities of the browser.
+On mobile the browser might pause or throttle the animation if the user switches to another tab.
+And there might be nothing to scroll.
+No matter the scenario a Promise is returned so you can await on it.
+
+#### ease
+
+Type: `Function`
+
+> Introduced in `v1.1.0`
+
+The default easing is implemented like this, with `t` being in the range of `0` => `1`:
+
+```typescript
+scrollIntoView(node, {
+  ease: t => 0.5 * (1 - Math.cos(Math.PI * t)),
+})
 ```
 
 ## Credits
