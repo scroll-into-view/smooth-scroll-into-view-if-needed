@@ -1,5 +1,12 @@
-import scrollIntoView from 'scroll-into-view-if-needed'
-import { Options } from 'scroll-into-view-if-needed/compute'
+import scrollIntoView, {
+  Options,
+  StandardBehaviorOptions,
+  CustomBehaviorOptions,
+} from 'scroll-into-view-if-needed'
+
+export interface SmoothBehaviorOptions extends Options {
+  behavior?: 'smooth'
+}
 
 // Memoize so we're much more friendly to non-dom envs
 let memoizedNow
@@ -13,8 +20,8 @@ var now = () => {
 
 const SCROLL_TIME = 300
 
-function ease(k) {
-  return 0.5 * (1 - Math.cos(Math.PI * k))
+function ease(t) {
+  return 0.5 * (1 - Math.cos(Math.PI * t))
 }
 
 function step(context) {
@@ -77,22 +84,36 @@ function smoothScroll(el, x, y, cb) {
   })
 }
 
-export default (target, options: Options = {}) => {
-  const { behavior = 'smooth' } = options
+const shouldSmoothScroll = <T>(options: any): options is T => {
+  return (options && !options.behavior) || options.behavior === 'smooth'
+}
 
-  // @TODO detect if someone is using this library without smooth behavior and maybe warn
-  if (behavior !== 'smooth') {
-    return scrollIntoView(target, options)
+function scroll(target: Element, options?: SmoothBehaviorOptions): Promise<any>
+function scroll<T>(target: Element, options: CustomBehaviorOptions<T>): T
+function scroll(target: Element, options: StandardBehaviorOptions): void
+function scroll<T>(target, options) {
+  if (shouldSmoothScroll<SmoothBehaviorOptions>(options)) {
+    // @TODO replace <any> in promise signatures with better information
+    return scrollIntoView<Promise<any>>(target, {
+      ...(options || {}),
+      behavior: actions =>
+        Promise.all(
+          actions.map(
+            ({ el, left, top }) =>
+              new Promise(resolve =>
+                smoothScroll(el, left, top, () => resolve())
+              )
+          )
+        ),
+    })
   }
 
-  return scrollIntoView(target, {
-    ...options,
-    behavior: actions =>
-      Promise.all(
-        actions.map(
-          ({ el, left, top }) =>
-            new Promise(resolve => smoothScroll(el, left, top, () => resolve()))
-        )
-      ),
-  })
+  // @TODO maybe warn when someone could be using this library this way unintentionally
+
+  return scrollIntoView<T>(target, options)
 }
+
+// re-assign here makes the flowtype generation work
+const smoothScrollIntoView = scroll
+
+export default smoothScrollIntoView
