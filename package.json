@@ -12,6 +12,7 @@
   },
   "version": "1.0.1-alpha.3",
   "main": "index.js",
+  "module": "es/index.js",
   "files": ["es", "typings", "umd"],
   "scripts": {
     "prebuild": "yarn clean",
@@ -79,6 +80,16 @@
   "browserify": {
     "transform": ["loose-envify"]
   },
+  "bundlesize": [
+    {
+      "path": "./umd/smooth-scroll-into-view-if-needed.min.js",
+      "maxSize": "1.75 kB"
+    },
+    {
+      "path": "./umd/smooth-scroll-into-view-if-needed.js",
+      "maxSize": "3 kB"
+    }
+  ],
   "lint-staged": {
     "*.js": ["prettier --write", "git add"],
     "*.{ts,tsx}": ["prettier --write", "git add"],
@@ -88,7 +99,6 @@
     "**/package.json": ["prettier-package-json --write", "git add"],
     "**/.babelrc": ["prettier --write", "git add"]
   },
-  "module": "es/index.js",
   "prettier": {
     "semi": false,
     "singleQuote": true,
