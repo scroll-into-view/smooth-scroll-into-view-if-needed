@@ -11,8 +11,10 @@
   "devDependencies": {
     "extends": ":automergeMajor"
   },
-  "packageRules": [{
-    "packageNames": ["scroll-into-view-if-needed"],
-"semanticCommitType": "fix"
-  }]
+  "packageRules": [
+    {
+      "packageNames": ["scroll-into-view-if-needed"],
+      "semanticCommitType": "fix"
+    }
+  ]
 }
