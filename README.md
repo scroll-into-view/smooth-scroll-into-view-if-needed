@@ -15,7 +15,7 @@ And while `scroll-into-view-if-needed` use the same default options as browsers 
 ## Install
 
 ```bash
-yarn add smooth-scroll-into-view-if-needed
+yarn add smooth-scroll-into-view-if-needed scroll-into-view-if-needed
 ```
 
 ## Usage
