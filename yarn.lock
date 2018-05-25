@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@babel/cli@7.0.0-beta.48":
-  version "7.0.0-beta.48"
-  resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.0.0-beta.48.tgz#8a21e5af44bf2f135c459738ec10d1857b1c3288"
+"@babel/cli@7.0.0-beta.49":
+  version "7.0.0-beta.49"
+  resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.0.0-beta.49.tgz#c8c3135f7bc48428436faf5e3f274227a99ef2a8"
   dependencies:
     commander "^2.8.1"
     convert-source-map "^1.1.0"
@@ -192,6 +192,10 @@
   version "7.0.0-beta.48"
   resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.48.tgz#bf310f89e91d146ac0f1369562164be45edba587"
 
+"@babel/helper-plugin-utils@7.0.0-beta.49":
+  version "7.0.0-beta.49"
+  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.49.tgz#0e9fcbb834f878bb365d2a8ea90eee21ba3ccd23"
+
 "@babel/helper-regex@7.0.0-beta.48":
   version "7.0.0-beta.48"
   resolved "https://registry.yarnpkg.com/@babel/helper-regex/-/helper-regex-7.0.0-beta.48.tgz#cd11feed726194eca6158ecdfa41033ef49c3e1b"
@@ -290,11 +294,11 @@
   version "7.0.0-beta.48"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.0.0-beta.48.tgz#f93895cbacee703c0ec98e5af3901c77edd9f1d7"
 
-"@babel/plugin-external-helpers@7.0.0-beta.48":
-  version "7.0.0-beta.48"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-external-helpers/-/plugin-external-helpers-7.0.0-beta.48.tgz#8b3e3213a44a6de4392214fe7b6923bf535e025a"
+"@babel/plugin-external-helpers@7.0.0-beta.49":
+  version "7.0.0-beta.49"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-external-helpers/-/plugin-external-helpers-7.0.0-beta.49.tgz#c67ffa9e23d7063810b0d4304857bf5c16f8a35b"
   dependencies:
-    "@babel/helper-plugin-utils" "7.0.0-beta.48"
+    "@babel/helper-plugin-utils" "7.0.0-beta.49"
 
 "@babel/plugin-proposal-async-generator-functions@7.0.0-beta.48":
   version "7.0.0-beta.48"
