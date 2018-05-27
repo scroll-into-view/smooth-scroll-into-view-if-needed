@@ -4471,9 +4471,9 @@ sax@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-scroll-into-view-if-needed@2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-2.2.2.tgz#6d815c2a29b34e533d89eb7128ea009615253f69"
+scroll-into-view-if-needed@2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-2.2.4.tgz#c8fa32e28dd29a0315e604e94ca23e03936319a5"
 
 semantic-release@15.5.0:
   version "15.5.0"
