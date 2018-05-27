@@ -46,7 +46,7 @@ function smoothScroll(
   x,
   y,
   duration = 450,
-  ease = t => 1+(--t)*t*t*t*t,
+  ease = t => 1 + --t * t * t * t * t,
   cb
 ) {
   let scrollable
