@@ -54,7 +54,7 @@ Check the full API in [`scroll-into-view-if-needed`](https://github.com/stipsan/
 
 This library differs from the API in `scroll-into-view-if-needed` in the following ways:
 
-* the second argument can't be a boolean, it must be either undefined or an object.
+- the second argument can't be a boolean, it must be either undefined or an object.
 
 ### scrollIntoView(target, [options]) => Promise
 
@@ -72,8 +72,8 @@ Type: `'auto' | 'smooth' | 'instant' | Function`<br> Default: `'smooth'`
 
 This option deviates from `scroll-into-view-if-needed` in two ways.
 
-* The default value is `smooth` instead of `auto`
-* Using `smooth` adds it to browsers that miss it, and overrides the native smooth scrolling in the browsers that have it to ensure the scrolling is consistent in any browser.
+- The default value is `smooth` instead of `auto`
+- Using `smooth` adds it to browsers that miss it, and overrides the native smooth scrolling in the browsers that have it to ensure the scrolling is consistent in any browser.
 
 #### duration
 
@@ -105,7 +105,7 @@ Here's more examples, like easeInCubic etc: https://gist.github.com/gre/1650294#
 
 ## Credits
 
-* [smoothscroll](https://github.com/iamdustan/smoothscroll) for the reference implementation of smooth scrolling.
+- [smoothscroll](https://github.com/iamdustan/smoothscroll) for the reference implementation of smooth scrolling.
 
 ## More documentation will be added
 
