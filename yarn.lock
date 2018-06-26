@@ -3962,9 +3962,9 @@ sax@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-scroll-into-view-if-needed@2.2.7:
-  version "2.2.7"
-  resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-2.2.7.tgz#59bb77c65c024da55ff703e7232f7175ceed397f"
+scroll-into-view-if-needed@2.2.8:
+  version "2.2.8"
+  resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-2.2.8.tgz#c22ffbddce5c8a31949ab3e01c27a6c29ba7b979"
 
 semantic-release@15.6.0:
   version "15.6.0"
