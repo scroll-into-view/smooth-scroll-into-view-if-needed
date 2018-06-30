@@ -45,7 +45,7 @@ function smoothScroll(
   el,
   x,
   y,
-  duration = 450,
+  duration = 600,
   ease = t => 1 + --t * t * t * t * t,
   cb
 ) {
