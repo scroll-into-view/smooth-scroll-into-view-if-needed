@@ -16,8 +16,8 @@
       "packageNames": ["scroll-into-view-if-needed"],
       "semanticCommitType": "fix",
       "major": {
-    "automerge": false
-  }
+        "automerge": false
+      }
     }
   ]
 }
