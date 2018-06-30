@@ -14,7 +14,7 @@ export interface SmoothBehaviorOptions extends Options {
 }
 
 // Memoize so we're much more friendly to non-dom envs
-let memoizedNow
+let memoizedNow: () => number
 const now = () => {
   if (!memoizedNow) {
     memoizedNow =
@@ -32,7 +32,7 @@ type Context = {
   x: number
   y: number
   duration: number
-  ease: Function
+  ease: CustomEasing
   cb: Function
 }
 function step(context: Context) {
@@ -54,12 +54,12 @@ function step(context: Context) {
 }
 
 function smoothScroll(
-  el,
-  x,
-  y,
+  el: Element,
+  x: number,
+  y: number,
   duration = 600,
-  ease = t => 1 + --t * t * t * t * t,
-  cb
+  ease: CustomEasing = t => 1 + --t * t * t * t * t,
+  cb: Function
 ) {
   let scrollable
   let startX
