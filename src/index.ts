@@ -23,7 +23,19 @@ const now = () => {
   return memoizedNow()
 }
 
-function step(context) {
+type Context = {
+  scrollable: Element
+  method: Function
+  startTime: number
+  startX: number
+  startY: number
+  x: number
+  y: number
+  duration: number
+  ease: Function
+  cb: Function
+}
+function step(context: Context) {
   const time = now()
   const elapsed = Math.min((time - context.startTime) / context.duration, 1)
 
@@ -58,7 +70,7 @@ function smoothScroll(
   scrollable = el
   startX = el.scrollLeft
   startY = el.scrollTop
-  method = (x, y) => {
+  method = (x: number, y: number) => {
     // @TODO use Element.scroll if it exists, as it is potentially better performing
     el.scrollLeft = x
     el.scrollTop = y
@@ -86,7 +98,7 @@ const shouldSmoothScroll = <T>(options: any): options is T => {
 function scroll(target: Element, options?: SmoothBehaviorOptions): Promise<any>
 function scroll<T>(target: Element, options: CustomBehaviorOptions<T>): T
 function scroll(target: Element, options: StandardBehaviorOptions): void
-function scroll<T>(target, options) {
+function scroll<T>(target: Element, options?: any) {
   if (shouldSmoothScroll<SmoothBehaviorOptions>(options)) {
     const overrides = options || {}
     // @TODO replace <any> in promise signatures with better information

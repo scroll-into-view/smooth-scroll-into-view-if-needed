@@ -12,7 +12,8 @@
     "skipLibCheck": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-
+    "strict": true,
+    "noImplicitAny": true,
     "alwaysStrict": true,
     "lib": ["es5", "es2015.promise", "dom"]
   },
