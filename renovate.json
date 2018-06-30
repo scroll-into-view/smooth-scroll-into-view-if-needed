@@ -14,7 +14,10 @@
   "packageRules": [
     {
       "packageNames": ["scroll-into-view-if-needed"],
-      "semanticCommitType": "fix"
+      "semanticCommitType": "fix",
+      "major": {
+        "automerge": false
+      }
     }
   ]
 }
