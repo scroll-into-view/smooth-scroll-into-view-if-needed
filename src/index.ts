@@ -55,20 +55,13 @@ function smoothScroll(
   let method
 
   // define scroll context
-  if (el === document.documentElement) {
-    scrollable = window
-    startX = window.scrollX || window.pageXOffset
-    startY = window.scrollY || window.pageYOffset
-    method = (x, y) => window.scroll(x, y)
-  } else {
-    scrollable = el
-    startX = el.scrollLeft
-    startY = el.scrollTop
-    method = (x, y) => {
-      // @TODO use Element.scroll if it exists, as it is potentially better performing
-      el.scrollLeft = x
-      el.scrollTop = y
-    }
+  scrollable = el
+  startX = el.scrollLeft
+  startY = el.scrollTop
+  method = (x, y) => {
+    // @TODO use Element.scroll if it exists, as it is potentially better performing
+    el.scrollLeft = x
+    el.scrollTop = y
   }
 
   // scroll looping over a frame
