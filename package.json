@@ -84,11 +84,8 @@
   "bundlesize": [
     {
       "path": "./umd/smooth-scroll-into-view-if-needed.min.js",
-      "maxSize": "2 kB"
-    },
-    {
-      "path": "./umd/smooth-scroll-into-view-if-needed.js",
-      "maxSize": "3.5 kB"
+      "maxSize": "5 kB",
+      "compression": "none"
     }
   ],
   "lint-staged": {
