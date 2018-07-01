@@ -14,7 +14,7 @@ export interface SmoothBehaviorOptions extends Options {
 }
 
 // Memoize so we're much more friendly to non-dom envs
-let memoizedNow
+let memoizedNow: () => number
 const now = () => {
   if (!memoizedNow) {
     memoizedNow =
@@ -23,7 +23,19 @@ const now = () => {
   return memoizedNow()
 }
 
-function step(context) {
+type Context = {
+  scrollable: Element
+  method: Function
+  startTime: number
+  startX: number
+  startY: number
+  x: number
+  y: number
+  duration: number
+  ease: CustomEasing
+  cb: Function
+}
+function step(context: Context) {
   const time = now()
   const elapsed = Math.min((time - context.startTime) / context.duration, 1)
 
@@ -42,12 +54,12 @@ function step(context) {
 }
 
 function smoothScroll(
-  el,
-  x,
-  y,
-  duration = 450,
-  ease = t => 1 + --t * t * t * t * t,
-  cb
+  el: Element,
+  x: number,
+  y: number,
+  duration = 600,
+  ease: CustomEasing = t => 1 + --t * t * t * t * t,
+  cb: Function
 ) {
   let scrollable
   let startX
@@ -55,20 +67,13 @@ function smoothScroll(
   let method
 
   // define scroll context
-  if (el === document.documentElement) {
-    scrollable = window
-    startX = window.scrollX || window.pageXOffset
-    startY = window.scrollY || window.pageYOffset
-    method = (x, y) => window.scroll(x, y)
-  } else {
-    scrollable = el
-    startX = el.scrollLeft
-    startY = el.scrollTop
-    method = (x, y) => {
-      // @TODO use Element.scroll if it exists, as it is potentially better performing
-      el.scrollLeft = x
-      el.scrollTop = y
-    }
+  scrollable = el
+  startX = el.scrollLeft
+  startY = el.scrollTop
+  method = (x: number, y: number) => {
+    // @TODO use Element.scroll if it exists, as it is potentially better performing
+    el.scrollLeft = x
+    el.scrollTop = y
   }
 
   // scroll looping over a frame
@@ -93,7 +98,7 @@ const shouldSmoothScroll = <T>(options: any): options is T => {
 function scroll(target: Element, options?: SmoothBehaviorOptions): Promise<any>
 function scroll<T>(target: Element, options: CustomBehaviorOptions<T>): T
 function scroll(target: Element, options: StandardBehaviorOptions): void
-function scroll<T>(target, options) {
+function scroll<T>(target: Element, options?: any) {
   if (shouldSmoothScroll<SmoothBehaviorOptions>(options)) {
     const overrides = options || {}
     // @TODO replace <any> in promise signatures with better information
