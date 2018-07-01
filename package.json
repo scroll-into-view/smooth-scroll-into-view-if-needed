@@ -30,8 +30,8 @@
     "prepublishOnly": "unset npm_config_cafile && yarn build",
     "typecheck": "tsc --noEmit"
   },
-  "peerDependencies": {
-    "scroll-into-view-if-needed": "^2.2.1"
+  "dependencies": {
+    "scroll-into-view-if-needed": "2.2.9"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.51",
@@ -58,7 +58,6 @@
     "rollup-plugin-node-resolve": "3.3.0",
     "rollup-plugin-replace": "2.0.0",
     "rollup-plugin-terser": "1.0.1",
-    "scroll-into-view-if-needed": "2.2.8",
     "semantic-release": "15.6.0",
     "typescript": "2.9.2"
   },
