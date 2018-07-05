@@ -1267,6 +1267,10 @@ component-emitter@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"
 
+compute-scroll-into-view@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/compute-scroll-into-view/-/compute-scroll-into-view-1.0.2.tgz#2cc5357981449aa6b2dd82aff2176e03c5ab8441"
+
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
@@ -3964,9 +3968,11 @@ sax@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-scroll-into-view-if-needed@2.2.10:
-  version "2.2.10"
-  resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-2.2.10.tgz#ffe770e4bccae455b9a534cf86468e0a2b1850f9"
+scroll-into-view-if-needed@2.2.11:
+  version "2.2.11"
+  resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-2.2.11.tgz#ce9092803e1233f0cff21002f341997794bb0a8a"
+  dependencies:
+    compute-scroll-into-view "1.0.2"
 
 semantic-release@15.6.3:
   version "15.6.3"
