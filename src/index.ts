@@ -50,6 +50,9 @@ function step(context: Context) {
   // scroll more if we have not reached our destination
   if (currentX !== context.x || currentY !== context.y) {
     requestAnimationFrame(() => step(context))
+  } else {
+    // If nothing left to scroll lets fire the callback
+    context.cb()
   }
 }
 
