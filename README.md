@@ -18,6 +18,12 @@ And while `scroll-into-view-if-needed` use the same default options as browsers 
 yarn add smooth-scroll-into-view-if-needed
 ```
 
+The UMD build is also available on [unpkg](https://unpkg.com/smooth-scroll-into-view-if-needed/umd/):
+
+<script src="https://unpkg.com/smooth-scroll-into-view-if-needed/umd/smooth-scroll-into-view-if-needed.min.js"></script>
+
+You can find the library on `window.scrollIntoView`.
+
 ## Usage
 
 ```js
@@ -111,6 +117,7 @@ scrollIntoView(node, {
 ```
 
 Sine easing in and out:
+
 ```typescript
 scrollIntoView(node, {
   ease: t => (1 + Math.sin(Math.PI * t - Math.PI / 2)) / 2,
