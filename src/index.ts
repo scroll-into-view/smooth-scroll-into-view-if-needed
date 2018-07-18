@@ -38,7 +38,6 @@ type Context = {
 function step(context: Context) {
   const time = now()
   const elapsed = Math.min((time - context.startTime) / context.duration, 1)
-
   // apply easing to elapsed time
   const value = context.ease(elapsed)
 
@@ -114,16 +113,23 @@ function scroll<T>(target: Element, options?: any) {
         Promise.all(
           actions.map(
             ({ el, left, top }) =>
-              new Promise(resolve =>
-                smoothScroll(
+              new Promise(resolve => {
+                const startLeft = el.scrollLeft
+                const startTop = el.scrollTop
+                return smoothScroll(
                   el,
                   left,
                   top,
                   overrides.duration,
                   overrides.ease,
-                  () => resolve()
+                  () =>
+                    resolve({
+                      el,
+                      left: [startLeft, left],
+                      top: [startTop, top],
+                    })
                 )
-              )
+              })
           )
         ),
     })
