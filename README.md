@@ -110,6 +110,13 @@ scrollIntoView(node, {
 })
 ```
 
+Sine easing in and out:
+```typescript
+scrollIntoView(node, {
+  ease: t => (1 + Math.sin(Math.PI * t - Math.PI / 2)) / 2,
+})
+```
+
 ## Credits
 
 - [smoothscroll](https://github.com/iamdustan/smoothscroll) for the reference implementation of smooth scrolling.
