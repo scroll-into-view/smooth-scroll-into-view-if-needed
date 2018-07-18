@@ -28,6 +28,7 @@
     "precommit": "lint-staged",
     "dev": "concurrently 'tsc --noEmit --watch' 'yarn build:cjs --watch' 'yarn build:es --watch' 'yarn build:umd --watch' 'yarn build:umd.min --watch'",
     "prepublishOnly": "unset npm_config_cafile && yarn build",
+    "test": "jest",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -39,6 +40,7 @@
     "@babel/plugin-external-helpers": "7.0.0-beta.54",
     "@babel/preset-env": "7.0.0-beta.54",
     "@babel/preset-typescript": "7.0.0-beta.54",
+    "@types/jest": "23.3.0",
     "babel-eslint": "8.2.6",
     "babel-plugin-add-module-exports": "0.2.1",
     "babel-plugin-dev-expression": "0.2.1",
@@ -48,6 +50,8 @@
     "eslint-plugin-import": "2.13.0",
     "eslint-plugin-react": "7.10.0",
     "husky": "0.14.3",
+    "jest": "23.4.1",
+    "jest-junit": "5.1.0",
     "lint-staged": "7.2.0",
     "prettier": "1.13.7",
     "prettier-package-json": "1.6.0",
@@ -59,6 +63,7 @@
     "rollup-plugin-replace": "2.0.0",
     "rollup-plugin-terser": "1.0.1",
     "semantic-release": "15.8.0",
+    "ts-jest": "23.0.1",
     "typescript": "2.9.2"
   },
   "keywords": [
@@ -87,6 +92,29 @@
       "compression": "none"
     }
   ],
+  "jest": {
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.(js|ts)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "reporters": [
+      "default",
+      [
+        "jest-junit",
+        {
+          "output": "reports/jest/results.xml"
+        }
+      ]
+    ]
+  },
   "lint-staged": {
     "*.js": [
       "prettier --write",
