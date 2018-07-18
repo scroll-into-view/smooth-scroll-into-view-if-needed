@@ -78,7 +78,7 @@ function smoothScroll(
     el.scrollTop = y
   }
 
-  // scroll looping over a frame
+  // scroll looping over a frame if needed
   step({
     scrollable: scrollable,
     method: method,
@@ -111,11 +111,16 @@ function scroll<T>(target: Element, options?: any) {
       boundary: overrides.boundary,
       behavior: actions =>
         Promise.all(
-          actions.map(
-            ({ el, left, top }) =>
+          actions.reduce((results: Promise<any>[], { el, left, top }) => {
+            const startLeft = el.scrollLeft
+            const startTop = el.scrollTop
+            if (startLeft === left && startTop === top) {
+              return results
+            }
+
+            return [
+              ...results,
               new Promise(resolve => {
-                const startLeft = el.scrollLeft
-                const startTop = el.scrollTop
                 return smoothScroll(
                   el,
                   left,
@@ -129,8 +134,9 @@ function scroll<T>(target: Element, options?: any) {
                       top: [startTop, top],
                     })
                 )
-              })
-          )
+              }),
+            ]
+          }, [])
         ),
     })
   }
