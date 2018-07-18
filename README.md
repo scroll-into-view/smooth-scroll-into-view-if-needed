@@ -75,6 +75,8 @@ This option deviates from `scroll-into-view-if-needed` in two ways.
 - The default value is `smooth` instead of `auto`
 - Using `smooth` adds it to browsers that miss it, and overrides the native smooth scrolling in the browsers that have it to ensure the scrolling is consistent in any browser.
 
+The options `auto`, `instant` or `Function` behaves exactly like in `scroll-into-view-if-needed`.
+
 #### duration
 
 Type: `number`<br> Default: `300`
