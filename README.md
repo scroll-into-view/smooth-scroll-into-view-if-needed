@@ -52,6 +52,8 @@ const sequence = async () => {
 }
 ```
 
+The promise interface allows more advanced use cases, like a custom waterfall effect seen here: https://codepen.io/stipsan/pen/gjwWXV
+
 ## Polyfills
 
 This library rely on `Promise` and `requestAnimationFrame`. This library does not ship with polyfills for these to keep bundlesizes as low as possible.
