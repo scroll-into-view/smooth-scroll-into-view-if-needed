@@ -7,7 +7,9 @@ import scrollIntoView from '../src'
 jest.mock(
   'scroll-into-view-if-needed',
   () => (_target: Element, options: any) =>
-    options.behavior ? options.behavior([]) : [{ el: {}, top: 0, left: 0 }]
+    typeof options.behavior == 'function'
+      ? options.behavior([])
+      : [{ el: {}, top: 0, left: 0 }]
 )
 
 test('options is optional', () => {
@@ -27,4 +29,11 @@ test('behavior option set to smooth works correctly', () => {
   return expect(
     scrollIntoView(document.body, { behavior: 'smooth' })
   ).resolves.toEqual([])
+})
+
+test('other behavior options still returns a promise', () => {
+  expect.assertions(1)
+  return expect(
+    scrollIntoView(document.body, { behavior: 'auto' })
+  ).resolves.toEqual([{ el: {}, top: 0, left: 0 }])
 })
