@@ -20,7 +20,9 @@ yarn add smooth-scroll-into-view-if-needed
 
 The UMD build is also available on [unpkg](https://unpkg.com/smooth-scroll-into-view-if-needed/umd/):
 
+```html
 <script src="https://unpkg.com/smooth-scroll-into-view-if-needed/umd/smooth-scroll-into-view-if-needed.min.js"></script>
+```
 
 You can find the library on `window.scrollIntoView`.
 
