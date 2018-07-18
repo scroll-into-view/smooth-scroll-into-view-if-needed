@@ -91,15 +91,24 @@ Type: `Function`
 
 > Introduced in `v1.1.0`
 
-The default easing is implemented like this, with `t` being in the range of `0` => `1`:
+The default easing is `easeOutQuint` based on these algorithms: https://gist.github.com/gre/1650294#file-easing-js
+
+Linear example:
 
 ```typescript
 scrollIntoView(node, {
-  ease: t => 0.5 * (1 - Math.cos(Math.PI * t)),
+  ease: t => t,
 })
 ```
 
-Here's more examples, like easeInCubic etc: https://gist.github.com/gre/1650294#file-easing-js
+Acceleration until halfway, then deceleration:
+
+```typescript
+scrollIntoView(node, {
+  ease: t =>
+    t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
+})
+```
 
 ## Credits
 
