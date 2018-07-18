@@ -129,9 +129,7 @@ function scroll<T>(target: Element, options?: any) {
     })
   }
 
-  // @TODO maybe warn when someone could be using this library this way unintentionally
-
-  return scrollIntoView<T>(target, options)
+  return Promise.resolve(scrollIntoView<T>(target, options))
 }
 
 // re-assign here makes the flowtype generation work
