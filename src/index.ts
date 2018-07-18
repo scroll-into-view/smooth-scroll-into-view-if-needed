@@ -102,8 +102,8 @@ function scroll(target: Element, options?: SmoothBehaviorOptions): Promise<any>
 function scroll<T>(target: Element, options: CustomBehaviorOptions<T>): T
 function scroll(target: Element, options: StandardBehaviorOptions): void
 function scroll<T>(target: Element, options?: any) {
-  if (shouldSmoothScroll<SmoothBehaviorOptions>(options)) {
-    const overrides = options || {}
+  const overrides = options || {}
+  if (shouldSmoothScroll<SmoothBehaviorOptions>(overrides)) {
     // @TODO replace <any> in promise signatures with better information
     return scrollIntoView<Promise<any>>(target, {
       block: overrides.block,
