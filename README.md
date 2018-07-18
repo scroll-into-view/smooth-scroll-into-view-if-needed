@@ -52,10 +52,6 @@ This library rely on `Promise` and `requestAnimationFrame`. This library does no
 
 Check the full API in [`scroll-into-view-if-needed`](https://github.com/stipsan/scroll-into-view-if-needed#api).
 
-This library differs from the API in `scroll-into-view-if-needed` in the following ways:
-
-- the second argument can't be a boolean, it must be either undefined or an object.
-
 ### scrollIntoView(target, [options]) => Promise
 
 `scroll-into-view-if-needed` does not return anything, while this library will return a Promise that is resolved when all of the scrolling boxes are finished scrolling.
