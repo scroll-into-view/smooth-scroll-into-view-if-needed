@@ -38,7 +38,6 @@ type Context = {
 function step(context: Context) {
   const time = now()
   const elapsed = Math.min((time - context.startTime) / context.duration, 1)
-
   // apply easing to elapsed time
   const value = context.ease(elapsed)
 
@@ -79,7 +78,7 @@ function smoothScroll(
     el.scrollTop = y
   }
 
-  // scroll looping over a frame
+  // scroll looping over a frame if needed
   step({
     scrollable: scrollable,
     method: method,
@@ -112,26 +111,37 @@ function scroll<T>(target: Element, options?: any) {
       boundary: overrides.boundary,
       behavior: actions =>
         Promise.all(
-          actions.map(
-            ({ el, left, top }) =>
-              new Promise(resolve =>
-                smoothScroll(
+          actions.reduce((results: Promise<any>[], { el, left, top }) => {
+            const startLeft = el.scrollLeft
+            const startTop = el.scrollTop
+            if (startLeft === left && startTop === top) {
+              return results
+            }
+
+            return [
+              ...results,
+              new Promise(resolve => {
+                return smoothScroll(
                   el,
                   left,
                   top,
                   overrides.duration,
                   overrides.ease,
-                  () => resolve()
+                  () =>
+                    resolve({
+                      el,
+                      left: [startLeft, left],
+                      top: [startTop, top],
+                    })
                 )
-              )
-          )
+              }),
+            ]
+          }, [])
         ),
     })
   }
 
-  // @TODO maybe warn when someone could be using this library this way unintentionally
-
-  return scrollIntoView<T>(target, options)
+  return Promise.resolve(scrollIntoView<T>(target, options))
 }
 
 // re-assign here makes the flowtype generation work

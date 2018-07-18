@@ -18,6 +18,12 @@ And while `scroll-into-view-if-needed` use the same default options as browsers 
 yarn add smooth-scroll-into-view-if-needed
 ```
 
+The UMD build is also available on [unpkg](https://unpkg.com/smooth-scroll-into-view-if-needed/umd/):
+
+<script src="https://unpkg.com/smooth-scroll-into-view-if-needed/umd/smooth-scroll-into-view-if-needed.min.js"></script>
+
+You can find the library on `window.scrollIntoView`.
+
 ## Usage
 
 ```js
@@ -51,10 +57,6 @@ This library rely on `Promise` and `requestAnimationFrame`. This library does no
 ## API
 
 Check the full API in [`scroll-into-view-if-needed`](https://github.com/stipsan/scroll-into-view-if-needed#api).
-
-This library differs from the API in `scroll-into-view-if-needed` in the following ways:
-
-- the second argument can't be a boolean, it must be either undefined or an object.
 
 ### scrollIntoView(target, [options]) => Promise
 
@@ -95,15 +97,32 @@ Type: `Function`
 
 > Introduced in `v1.1.0`
 
-The default easing is implemented like this, with `t` being in the range of `0` => `1`:
+The default easing is `easeOutQuint` based on these algorithms: https://gist.github.com/gre/1650294#file-easing-js
+
+Linear example:
 
 ```typescript
 scrollIntoView(node, {
-  ease: t => 0.5 * (1 - Math.cos(Math.PI * t)),
+  ease: t => t,
 })
 ```
 
-Here's more examples, like easeInCubic etc: https://gist.github.com/gre/1650294#file-easing-js
+Acceleration until halfway, then deceleration:
+
+```typescript
+scrollIntoView(node, {
+  ease: t =>
+    t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
+})
+```
+
+Sine easing in and out:
+
+```typescript
+scrollIntoView(node, {
+  ease: t => (1 + Math.sin(Math.PI * t - Math.PI / 2)) / 2,
+})
+```
 
 ## Credits
 
