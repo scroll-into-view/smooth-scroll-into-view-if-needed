@@ -5736,9 +5736,9 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
-ts-jest@23.1.0:
-  version "23.1.0"
-  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-23.1.0.tgz#1d193a3b51d78793062f1f9137629f8921301aa1"
+ts-jest@23.1.1:
+  version "23.1.1"
+  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-23.1.1.tgz#2f2236d2e0e9e796125bb0d36833da9cc58efc46"
   dependencies:
     closest-file-data "^0.1.4"
     fs-extra "6.0.1"
