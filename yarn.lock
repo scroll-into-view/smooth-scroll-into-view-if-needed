@@ -6407,9 +6407,9 @@ scroll-into-view-if-needed@2.2.16:
   dependencies:
     compute-scroll-into-view "1.0.7"
 
-semantic-release@15.9.12:
-  version "15.9.12"
-  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-15.9.12.tgz#7a6321ac2765a804165d05e3a5b1cdc2628aef59"
+semantic-release@15.9.13:
+  version "15.9.13"
+  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-15.9.13.tgz#18a3ec6dd6b9008fda10c51f587e61b970d6bb75"
   dependencies:
     "@semantic-release/commit-analyzer" "^6.0.0"
     "@semantic-release/error" "^2.2.0"
