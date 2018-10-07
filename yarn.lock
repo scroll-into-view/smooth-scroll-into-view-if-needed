@@ -1772,9 +1772,9 @@ component-emitter@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"
 
-compute-scroll-into-view@1.0.10:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/compute-scroll-into-view/-/compute-scroll-into-view-1.0.10.tgz#27fd2165fda2eef328baa749cb3f363af95d2bf3"
+compute-scroll-into-view@1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/compute-scroll-into-view/-/compute-scroll-into-view-1.0.11.tgz#7ff0a57f9aeda6314132d8994cce7aeca794fecf"
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -6557,11 +6557,11 @@ sax@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-scroll-into-view-if-needed@2.2.18:
-  version "2.2.18"
-  resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-2.2.18.tgz#28e54935d1d19ec97a56bd1aa15fc503f991953f"
+scroll-into-view-if-needed@2.2.19:
+  version "2.2.19"
+  resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-2.2.19.tgz#23e97ace6a6886f171f30b545a689b3afb8fc71b"
   dependencies:
-    compute-scroll-into-view "1.0.10"
+    compute-scroll-into-view "1.0.11"
 
 semantic-release@15.9.17:
   version "15.9.17"
