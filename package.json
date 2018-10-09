@@ -64,7 +64,7 @@
     "rollup-plugin-terser": "3.0.0",
     "semantic-release": "15.9.17",
     "ts-jest": "23.10.4",
-    "typescript": "3.1.1"
+    "typescript": "3.1.2"
   },
   "keywords": [
     "behavior-smooth",
