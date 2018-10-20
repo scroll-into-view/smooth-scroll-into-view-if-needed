@@ -7217,10 +7217,10 @@ scroll-into-view-if-needed@2.2.20:
   dependencies:
     compute-scroll-into-view "1.0.11"
 
-semantic-release@15.10.4:
-  version "15.10.4"
-  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-15.10.4.tgz#af047d3616101f5094861b67f08dea52f57a1a15"
-  integrity sha512-1GVK6rUrYKbsZoqeMbRgfKHDsc6/KJ2keVBzYNjitc0BnonZpY5fNRb6rrxayX1N4HR6uBZu/V3d+ZiBw5n8XQ==
+semantic-release@15.10.5:
+  version "15.10.5"
+  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-15.10.5.tgz#e47e318459cc1d79a087151613930aa70bbc494f"
+  integrity sha512-VrAiPxUc1DhqD7iDeIF2qRwZVC33MRHVFC/duiZuO0nDOQ4225pyx4O17o8VYWjMRyH7wFppJgdYD98u5IznRg==
   dependencies:
     "@semantic-release/commit-analyzer" "^6.1.0"
     "@semantic-release/error" "^2.2.0"
