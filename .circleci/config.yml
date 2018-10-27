@@ -1,4 +1,3 @@
-
 aliases:
   - &restore-cache
     keys:
@@ -48,7 +47,7 @@ jobs:
       - checkout
       - restore-cache: *restore-cache
       - *install
-      - run: 
+      - run:
           command: yarn test --ci --runInBand
       - store_test_results:
           path: reports
