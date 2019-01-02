@@ -61,7 +61,7 @@
     "rollup-plugin-commonjs": "9.2.0",
     "rollup-plugin-node-resolve": "4.0.0",
     "rollup-plugin-replace": "2.1.0",
-    "rollup-plugin-terser": "4.0.0",
+    "rollup-plugin-terser": "4.0.1",
     "semantic-release": "15.13.2",
     "ts-jest": "23.10.5",
     "typescript": "3.2.2"
