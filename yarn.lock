@@ -2,22 +2,22 @@
 # yarn lockfile v1
 
 
-"@babel/cli@7.2.3":
-  version "7.2.3"
-  resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.2.3.tgz#1b262e42a3e959d28ab3d205ba2718e1923cfee6"
-  integrity sha512-bfna97nmJV6nDJhXNPeEfxyMjWnt6+IjUAaDPiYRTBlm8L41n8nvw6UAqUCbvpFfU246gHPxW7sfWwqtF4FcYA==
+"@babel/cli@7.4.3":
+  version "7.4.3"
+  resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.4.3.tgz#353048551306ff42e5855b788b6ccd9477289774"
+  integrity sha512-cbC5H9iTDV9H7sMxK5rUm18UbdVPNTPqgdzmQAkOUP3YLysgDWLZaysVAfylK49rgTlzL01a6tXyq9rCb3yLhQ==
   dependencies:
     commander "^2.8.1"
     convert-source-map "^1.1.0"
     fs-readdir-recursive "^1.1.0"
     glob "^7.0.0"
-    lodash "^4.17.10"
+    lodash "^4.17.11"
     mkdirp "^0.5.1"
     output-file-sync "^2.0.0"
     slash "^2.0.0"
     source-map "^0.5.0"
   optionalDependencies:
-    chokidar "^2.0.3"
+    chokidar "^2.0.4"
 
 "@babel/code-frame@^7.0.0":
   version "7.0.0"
@@ -2140,25 +2140,6 @@ chardet@^0.7.0:
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
   integrity sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
 
-chokidar@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.0.3.tgz#dcbd4f6cbb2a55b4799ba8a840ac527e5f4b1176"
-  integrity sha512-zW8iXYZtXMx4kux/nuZVXjkLP+CyIK5Al5FHnj1OgTKGZfp4Oy6/ymtMSKFv3GD8DviEmUPmJg9eFdJ/JzudMg==
-  dependencies:
-    anymatch "^2.0.0"
-    async-each "^1.0.0"
-    braces "^2.3.0"
-    glob-parent "^3.1.0"
-    inherits "^2.0.1"
-    is-binary-path "^1.0.0"
-    is-glob "^4.0.0"
-    normalize-path "^2.1.1"
-    path-is-absolute "^1.0.0"
-    readdirp "^2.0.0"
-    upath "^1.0.0"
-  optionalDependencies:
-    fsevents "^1.1.2"
-
 chokidar@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.0.4.tgz#356ff4e2b0e8e43e322d18a372460bbcf3accd26"
@@ -3640,14 +3621,6 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
   integrity sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
-
-fsevents@^1.1.2:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-1.2.3.tgz#08292982e7059f6674c93d8b829c1e8604979ac0"
-  integrity sha512-X+57O5YkDTiEQGiw8i7wYc2nQgweIekqkepI8Q3y4wVlurgBt2SuwxTeYUYMZIGpLZH3r/TsMjczCMXE5ZOt7Q==
-  dependencies:
-    nan "^2.9.2"
-    node-pre-gyp "^0.9.0"
 
 fsevents@^1.2.2:
   version "1.2.4"
@@ -6125,7 +6098,7 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
-needle@^2.2.0, needle@^2.2.1:
+needle@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/needle/-/needle-2.2.1.tgz#b5e325bd3aae8c2678902fa296f729455d1d3a7d"
   integrity sha512-t/ZswCM9JTWjAdXS9VpvqhI2Ct2sL2MdY4fUXqGJaGBk13ge99ObqRksRTbBE56K+wxUXwwfZYOuZHifFW9q+Q==
@@ -6215,22 +6188,6 @@ node-pre-gyp@^0.10.0:
     npm-packlist "^1.1.6"
     npmlog "^4.0.2"
     rc "^1.2.7"
-    rimraf "^2.6.1"
-    semver "^5.3.0"
-    tar "^4"
-
-node-pre-gyp@^0.9.0:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.9.1.tgz#f11c07516dd92f87199dbc7e1838eab7cd56c9e0"
-  integrity sha1-8RwHUW3ZL4cZnbx+GDjqt81WyeA=
-  dependencies:
-    detect-libc "^1.0.2"
-    mkdirp "^0.5.1"
-    needle "^2.2.0"
-    nopt "^4.0.1"
-    npm-packlist "^1.1.6"
-    npmlog "^4.0.2"
-    rc "^1.1.7"
     rimraf "^2.6.1"
     semver "^5.3.0"
     tar "^4"
@@ -7274,7 +7231,7 @@ rc@^1.0.1, rc@^1.2.7, rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-rc@^1.1.6, rc@^1.1.7:
+rc@^1.1.6:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/rc/-/rc-1.2.6.tgz#eb18989c6d4f4f162c399f79ddd29f3835568092"
   integrity sha1-6xiYnG1PTxYsOZ953dKfODVWgJI=
@@ -8916,11 +8873,6 @@ unzip-response@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/unzip-response/-/unzip-response-2.0.1.tgz#d2f0f737d16b0615e72a6935ed04214572d56f97"
   integrity sha1-0vD3N9FrBhXnKmk17QQhRXLVb5c=
-
-upath@^1.0.0:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/upath/-/upath-1.0.5.tgz#02cab9ecebe95bbec6d5fc2566325725ab6d1a73"
-  integrity sha512-qbKn90aDQ0YEwvXoLqj0oiuUYroLX2lVHZ+b+xwjozFasAOC4GneDq5+OaIG5Zj+jFmbz/uO+f7a9qxjktJQww==
 
 upath@^1.0.5:
   version "1.1.0"
