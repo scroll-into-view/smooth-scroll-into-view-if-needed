@@ -42,7 +42,7 @@
     "@babel/preset-typescript": "7.3.3",
     "@types/jest": "24.0.11",
     "babel-eslint": "10.0.1",
-    "babel-plugin-add-module-exports": "1.0.0",
+    "babel-plugin-add-module-exports": "1.0.2",
     "babel-plugin-dev-expression": "0.2.1",
     "concurrently": "4.1.0",
     "eslint": "5.16.0",
