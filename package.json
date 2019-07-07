@@ -43,7 +43,7 @@
     "@types/jest": "24.0.15",
     "babel-eslint": "10.0.2",
     "babel-plugin-add-module-exports": "1.0.2",
-    "babel-plugin-dev-expression": "0.2.1",
+    "babel-plugin-dev-expression": "0.2.2",
     "concurrently": "4.1.1",
     "eslint": "6.0.1",
     "eslint-config-prettier": "6.0.0",
