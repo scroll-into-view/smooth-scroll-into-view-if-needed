@@ -41,7 +41,7 @@
     "@babel/preset-env": "7.5.5",
     "@babel/preset-typescript": "7.3.3",
     "@types/jest": "24.0.18",
-    "babel-eslint": "10.0.2",
+    "babel-eslint": "10.0.3",
     "babel-plugin-add-module-exports": "1.0.2",
     "babel-plugin-dev-expression": "0.2.2",
     "concurrently": "4.1.2",
