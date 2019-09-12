@@ -63,7 +63,7 @@
     "rollup-plugin-replace": "2.2.0",
     "rollup-plugin-terser": "5.1.2",
     "semantic-release": "15.13.24",
-    "ts-jest": "24.0.2",
+    "ts-jest": "24.1.0",
     "typescript": "3.5.3"
   },
   "keywords": [
