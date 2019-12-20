@@ -35,11 +35,11 @@
     "scroll-into-view-if-needed": "2.2.20"
   },
   "devDependencies": {
-    "@babel/cli": "7.7.5",
-    "@babel/core": "7.7.5",
+    "@babel/cli": "7.7.7",
+    "@babel/core": "7.7.7",
     "@babel/plugin-external-helpers": "7.7.4",
-    "@babel/preset-env": "7.7.6",
-    "@babel/preset-typescript": "7.7.4",
+    "@babel/preset-env": "7.7.7",
+    "@babel/preset-typescript": "7.7.7",
     "@types/jest": "24.0.24",
     "babel-eslint": "10.0.3",
     "babel-plugin-add-module-exports": "1.0.2",
