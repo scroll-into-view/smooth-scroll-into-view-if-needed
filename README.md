@@ -72,14 +72,14 @@ Type: `Object`
 
 #### behavior
 
-Type: `'auto' | 'smooth' | 'instant' | Function`<br> Default: `'smooth'`
+Type: `'auto' | 'smooth' | Function`<br> Default: `'smooth'`
 
 This option deviates from `scroll-into-view-if-needed` in two ways.
 
 - The default value is `smooth` instead of `auto`
 - Using `smooth` adds it to browsers that miss it, and overrides the native smooth scrolling in the browsers that have it to ensure the scrolling is consistent in any browser.
 
-The options `auto`, `instant` or `Function` behaves exactly like in `scroll-into-view-if-needed`.
+The options `auto` or `Function` behaves exactly like in `scroll-into-view-if-needed`.
 
 #### duration
 
