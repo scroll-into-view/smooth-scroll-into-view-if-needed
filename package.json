@@ -164,5 +164,5 @@
     ]
   },
   "typings": "typings/index.d.ts",
-  "sideEffects": false,
+  "sideEffects": false
 }
