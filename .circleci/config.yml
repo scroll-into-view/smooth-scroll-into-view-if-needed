@@ -54,7 +54,7 @@ jobs:
 
   Semantic Release:
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:12
     steps:
       - checkout
       - restore-cache: *restore-cache
