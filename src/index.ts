@@ -74,8 +74,9 @@ function smoothScroll(
   startY = el.scrollTop
   method = (x: number, y: number) => {
     // @TODO use Element.scroll if it exists, as it is potentially better performing
-    el.scrollLeft = x
-    el.scrollTop = y
+    // use ceil to include the the fractional part of the number for the scrolling
+    el.scrollLeft = Math.ceil(x)
+    el.scrollTop = Math.ceil(y)
   }
 
   // scroll looping over a frame if needed
