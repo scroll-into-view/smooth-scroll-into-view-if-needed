@@ -1063,9 +1063,9 @@
     universal-user-agent "^4.0.0"
 
 "@octokit/types@^2.0.0", "@octokit/types@^2.0.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-2.1.1.tgz#77e80d1b663c5f1f829e5377b728fa3c4fe5a97d"
-  integrity sha512-89LOYH+d/vsbDX785NOfLxTW88GjNd0lWRz1DVPVsZgg9Yett5O+3MOvwo7iHgvUwbFz0mf/yPIjBkUbs4kxoQ==
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-2.2.0.tgz#ddb0a90cf3e9624ae97e09d16f21f4c4a682d3be"
+  integrity sha512-iEeW3XlkxeM/CObeoYvbUv24Oe+DldGofY+3QyeJ5XKKA6B+V94ePk14EDCarseWdMs6afKZPv3dFq8C+SY5lw==
   dependencies:
     "@types/node" ">= 8"
 
@@ -2745,9 +2745,9 @@ editor@~1.0.0:
   integrity sha1-YMf4e9YrzGqJT6jM1q+3gjok90I=
 
 electron-to-chromium@^1.3.349:
-  version "1.3.356"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.356.tgz#fb985ee0f3023e6e11b97547ff3f738bdd8643d2"
-  integrity sha512-qW4YHMfOFjvx0jkSK2vjaHoLjk1+uJIV5tqtLDo7P5y3/kM8KQP23YBU0Y5fCSW4jIbDvEzeHDaY4+4vEaqqOw==
+  version "1.3.357"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.357.tgz#698033b739ce0e578905e1d8d81aa095d26f2756"
+  integrity sha512-bLF4fagmOUq4J8SFTNmXoKpLYqKW3pW1E15nvhsrFs4lzOwHpOVEX0d3LQiwuMT/PwSgrRUHQjtu4JgLS+Onuw==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
@@ -3163,9 +3163,9 @@ fast-deep-equal@^3.1.1:
   integrity sha512-8UEa58QDLauDNfpbrX55Q9jrGHThw2ZMdOky5Gl1CDtVeJDPVrG4Jxx1N8jw2gkWaff5UUuX1KJd+9zGe2B+ZA==
 
 fast-glob@^3.0.3:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.1.tgz#c5aaea632f92543b744bdcb19f11efd49e56c7b3"
-  integrity sha512-XObtOQLTl4EptWcBbO9O6wd17VlVf9YXYY/zuzuu7nZfTsv4BL3KupMAMUVzH88CUwWkI3uNHBfxtfU8PveVTQ==
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.2.tgz#ade1a9d91148965d4bf7c51f72e1ca662d32e63d"
+  integrity sha512-UDV82o4uQyljznxwMxyVRJgZZt3O5wENYojjzbaGEGZgeOxkLFf+V4cnUD+krzb2F72E18RhamkMZ7AdeggF7A==
   dependencies:
     "@nodelib/fs.stat" "^2.0.2"
     "@nodelib/fs.walk" "^1.2.3"
