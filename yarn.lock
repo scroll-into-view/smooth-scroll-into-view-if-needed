@@ -2747,9 +2747,9 @@ editor@~1.0.0:
   integrity sha1-YMf4e9YrzGqJT6jM1q+3gjok90I=
 
 electron-to-chromium@^1.3.361:
-  version "1.3.362"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.362.tgz#9ed33f9d0673888d6a2614347b4b63b490009408"
-  integrity sha512-xdU5VCoZyMPMOWtCaMgbr48OwWZHrMLbGnAOlEqibXiIGsb4kiCGWEHK5NOghcVLdBVIbr/BW+yuKxVuGTtzEg==
+  version "1.3.363"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.363.tgz#08756873e49446a92e0cee6c3cd9eb3c52043826"
+  integrity sha512-4w19wPBkeunBjOA53lNFT36IdOD3Tk1OoIDtTX+VToJUUDX42QfuhtsNKXv25wmSnoBOExM3kTbj7/WDNBwHuQ==
 
 elegant-spinner@^1.0.1:
   version "1.0.1"
