@@ -5938,9 +5938,9 @@ npm-pick-manifest@^3.0.0, npm-pick-manifest@^3.0.2:
     semver "^5.4.1"
 
 npm-profile@^4.0.2:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/npm-profile/-/npm-profile-4.0.3.tgz#791ef03af801e47eb767b1ca10c5a0f545da6632"
-  integrity sha512-NHASi4pvCzHMq3Wy4kYFTvCwGPrTbuuuF8M4TwSFFLzbebDa9dfjh26HMGDzRz+MmDvNDBWBZufx19qYi5HQOw==
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/npm-profile/-/npm-profile-4.0.4.tgz#28ee94390e936df6d084263ee2061336a6a1581b"
+  integrity sha512-Ta8xq8TLMpqssF0H60BXS1A90iMoM6GeKwsmravJ6wYjWwSzcYBTdyWa3DZCYqPutacBMEm7cxiOkiIeCUAHDQ==
   dependencies:
     aproba "^1.1.2 || 2"
     figgy-pudding "^3.4.1"
