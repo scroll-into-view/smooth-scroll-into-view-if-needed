@@ -40,7 +40,7 @@
     "@babel/plugin-external-helpers": "7.10.1",
     "@babel/preset-env": "7.10.2",
     "@babel/preset-typescript": "7.10.1",
-    "@types/jest": "24.0.25",
+    "@types/jest": "25.2.3",
     "babel-eslint": "10.1.0",
     "babel-plugin-add-module-exports": "1.0.2",
     "babel-plugin-dev-expression": "0.2.2",
