@@ -1191,9 +1191,9 @@
     universal-user-agent "^6.0.0"
 
 "@octokit/plugin-paginate-rest@^2.2.0":
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/@octokit/plugin-paginate-rest/-/plugin-paginate-rest-2.5.1.tgz#beffa460e88cf84a9cc81fd2d48603f8f9db8fde"
-  integrity sha512-tYmEThOFZbb4QbZ1LHtNpsYRb88OA2j9wCKhmmy/Va/l2uVgjb7k7GtcujiDLA7xaF0a7IhgadSNrZbM/zxyKw==
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@octokit/plugin-paginate-rest/-/plugin-paginate-rest-2.6.0.tgz#03416396e7a227b268c5b827365238f620a9c5c1"
+  integrity sha512-o+O8c1PqsC5++BHXfMZabRRsBIVb34tXPWyQLyp2IXq5MmkxdipS7TXM4Y9ldL1PzY9CTrCsn/lzFFJGM3oRRA==
   dependencies:
     "@octokit/types" "^5.5.0"
 
