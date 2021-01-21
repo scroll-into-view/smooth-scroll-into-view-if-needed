@@ -2,7 +2,7 @@
   "name": "smooth-scroll-into-view-if-needed",
   "description": "Ponyfill for smooth scrolling elements into view (if needed!)",
   "license": "MIT",
-  "author": "Stian Didriksen",
+  "author": "Cody Olsen",
   "homepage": "https://scroll-into-view-if-needed.netlify.com/",
   "repository": {
     "type": "git",
