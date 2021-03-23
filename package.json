@@ -32,7 +32,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "scroll-into-view-if-needed": "^2.2.26"
+    "scroll-into-view-if-needed": "^2.2.28"
   },
   "devDependencies": {
     "@babel/cli": "7.12.10",
