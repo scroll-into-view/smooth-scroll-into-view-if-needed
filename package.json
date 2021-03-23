@@ -40,7 +40,7 @@
     "@babel/plugin-external-helpers": "7.12.13",
     "@babel/preset-env": "7.13.12",
     "@babel/preset-typescript": "7.13.0",
-    "@types/jest": "24.9.1",
+    "@types/jest": "26.0.21",
     "babel-eslint": "10.1.0",
     "babel-plugin-add-module-exports": "1.0.4",
     "babel-plugin-dev-expression": "0.2.2",
@@ -64,7 +64,7 @@
     "rollup-plugin-terser": "7.0.2",
     "semantic-release": "17.4.2",
     "ts-jest": "26.5.4",
-    "typescript": "3.9.9"
+    "typescript": "4.2.3"
   },
   "keywords": [
     "behavior-smooth",
