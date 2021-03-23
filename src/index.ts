@@ -23,6 +23,13 @@ const now = () => {
   return memoizedNow()
 }
 
+type SmoothScrollAction = {
+  el: Element;
+  // [start, end] tuples of the distance animated
+  left: [number, number];
+  top: [number, number];
+}
+
 type Context = {
   scrollable: Element
   method: Function
@@ -103,15 +110,14 @@ function scroll(target: Element, options: StandardBehaviorOptions): void
 function scroll<T>(target: Element, options?: any) {
   const overrides = options || {}
   if (shouldSmoothScroll<SmoothBehaviorOptions>(overrides)) {
-    // @TODO replace <any> in promise signatures with better information
-    return scrollIntoView<Promise<any>>(target, {
+    return scrollIntoView<Promise<SmoothScrollAction[]>>(target, {
       block: overrides.block,
       inline: overrides.inline,
       scrollMode: overrides.scrollMode,
       boundary: overrides.boundary,
       behavior: actions =>
         Promise.all(
-          actions.reduce((results: Promise<any>[], { el, left, top }) => {
+          actions.reduce((results: Promise<SmoothScrollAction>[], { el, left, top }) => {
             const startLeft = el.scrollLeft
             const startTop = el.scrollTop
             if (startLeft === left && startTop === top) {
