@@ -116,6 +116,7 @@ function scroll<T>(target: Element, options?: any) {
       inline: overrides.inline,
       scrollMode: overrides.scrollMode,
       boundary: overrides.boundary,
+      // add skipOverflowHiddenElements
       skipOverflowHiddenElements: overrides.skipOverflowHiddenElements,
       behavior: actions =>
         Promise.all(
