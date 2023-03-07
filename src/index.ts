@@ -7,10 +7,20 @@ import scrollIntoView, {
 export interface CustomEasing {
   (t: number): number
 }
+
+type OnScrollChangeCallback = (scrollState: {
+  target: Element
+  elapsed: number
+  value: number
+  left: number
+  top: number
+}) => void
+
 export interface SmoothBehaviorOptions extends Options {
   behavior?: 'smooth'
   duration?: number
   ease?: CustomEasing
+  onScrollChange?: OnScrollChangeCallback
 }
 
 // Memoize so we're much more friendly to non-dom envs
@@ -32,7 +42,7 @@ type SmoothScrollAction = {
 
 type Context = {
   scrollable: Element
-  method: Function
+  method: (elapsed: number, value: number, x: number, y: number) => void
   startTime: number
   startX: number
   startY: number
@@ -51,7 +61,7 @@ function step(context: Context) {
   const currentX = context.startX + (context.x - context.startX) * value
   const currentY = context.startY + (context.y - context.startY) * value
 
-  context.method(currentX, currentY)
+  context.method(currentX, currentY, elapsed, value)
 
   // scroll more if we have not reached our destination
   if (currentX !== context.x || currentY !== context.y) {
@@ -68,22 +78,29 @@ function smoothScroll(
   y: number,
   duration = 600,
   ease: CustomEasing = t => 1 + --t * t * t * t * t,
-  cb: Function
+  cb: Function,
+  onScrollChange?: OnScrollChangeCallback
 ) {
-  let scrollable
-  let startX
-  let startY
-  let method
-
   // define scroll context
-  scrollable = el
-  startX = el.scrollLeft
-  startY = el.scrollTop
-  method = (x: number, y: number) => {
+  const scrollable = el
+  const startX = el.scrollLeft
+  const startY = el.scrollTop
+  const method = (x: number, y: number, elapsed: number, value: number, ) => {
     // @TODO use Element.scroll if it exists, as it is potentially better performing
     // use ceil to include the the fractional part of the number for the scrolling
-    el.scrollLeft = Math.ceil(x)
-    el.scrollTop = Math.ceil(y)
+    const left = Math.ceil(x)
+    const top = Math.ceil(y)
+
+    el.scrollLeft = left
+    el.scrollTop = top
+
+    onScrollChange?.({
+      target: el,
+      elapsed,
+      value,
+      left,
+      top,
+    })
   }
 
   // scroll looping over a frame if needed
@@ -139,7 +156,8 @@ function scroll<T>(target: Element, options?: any) {
                       el,
                       left: [startLeft, left],
                       top: [startTop, top],
-                    })
+                    }),
+                  overrides.onScrollChange
                 )
               }),
             ]
