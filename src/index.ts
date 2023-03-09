@@ -134,7 +134,7 @@ function scroll<T>(target: Element, options?: any) {
       scrollMode: overrides.scrollMode,
       boundary: overrides.boundary,
       skipOverflowHiddenElements: overrides.skipOverflowHiddenElements,
-      behavior: actions =>
+      behavior: (actions) =>
         Promise.all(
           actions.reduce(
             (results: Promise<SmoothScrollAction>[], { el, left, top }) => {
