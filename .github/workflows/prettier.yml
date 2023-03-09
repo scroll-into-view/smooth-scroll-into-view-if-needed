@@ -1,0 +1,35 @@
+---
+name: Prettier
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  run:
+    name: 🤔
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
+      - uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3
+        with:
+          cache: npm
+          node-version: lts/*
+      - run: npm ci --ignore-scripts --only-dev
+      - uses: actions/cache@6998d139ddd3e68c71e9e398d8e40b71a2f39812 # v3
+        with:
+          path: node_modules/.cache/prettier/.prettier-cache
+          key: prettier-${{ hashFiles('package-lock.json') }}-${{ hashFiles('.gitignore') }}
+      - name: check if workflows needs prettier
+        run: npx prettier --cache --check ".github/workflows/**/*.yml" || (echo "An action can't make changes to actions, you'll have to run prettier manually" && exit 1)
+      - run: npx prettier --ignore-path .gitignore --cache --write .
+      - uses: EndBug/add-and-commit@61a88be553afe4206585b31aa72387c64295d08b # tag=v9
+        with:
+          default_author: github_actions
+          commit: --no-verify
+          message: 'chore(prettier): 🤖 ✨'

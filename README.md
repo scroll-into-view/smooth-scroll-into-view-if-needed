@@ -105,7 +105,7 @@ Linear example:
 
 ```typescript
 scrollIntoView(node, {
-  ease: t => t,
+  ease: (t) => t,
 })
 ```
 
@@ -113,7 +113,7 @@ Acceleration until halfway, then deceleration:
 
 ```typescript
 scrollIntoView(node, {
-  ease: t =>
+  ease: (t) =>
     t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
 })
 ```
@@ -122,7 +122,7 @@ Sine easing in and out:
 
 ```typescript
 scrollIntoView(node, {
-  ease: t => (1 + Math.sin(Math.PI * t - Math.PI / 2)) / 2,
+  ease: (t) => (1 + Math.sin(Math.PI * t - Math.PI / 2)) / 2,
 })
 ```
 

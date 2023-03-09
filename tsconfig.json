@@ -18,5 +18,5 @@
     "alwaysStrict": true,
     "lib": ["es5", "es2015.promise", "dom"]
   },
-  "exclude": ["tests"]
+  "exclude": ["tests", "package.config.ts"]
 }
