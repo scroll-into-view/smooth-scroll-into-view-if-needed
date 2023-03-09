@@ -34,10 +34,10 @@ const now = () => {
 }
 
 type SmoothScrollAction = {
-  el: Element;
+  el: Element
   // [start, end] tuples of the distance animated
-  left: [number, number];
-  top: [number, number];
+  left: [number, number]
+  top: [number, number]
 }
 
 type Context = {
@@ -77,7 +77,7 @@ function smoothScroll(
   x: number,
   y: number,
   duration = 600,
-  ease: CustomEasing = t => 1 + --t * t * t * t * t,
+  ease: CustomEasing = (t) => 1 + --t * t * t * t * t,
   cb: Function,
   onScrollChange?: OnScrollChangeCallback
 ) {
@@ -85,7 +85,7 @@ function smoothScroll(
   const scrollable = el
   const startX = el.scrollLeft
   const startY = el.scrollTop
-  const method = (x: number, y: number, elapsed: number, value: number, ) => {
+  const method = (x: number, y: number, elapsed: number, value: number) => {
     // @TODO use Element.scroll if it exists, as it is potentially better performing
     // use ceil to include the the fractional part of the number for the scrolling
     const left = Math.ceil(x)
@@ -133,35 +133,38 @@ function scroll<T>(target: Element, options?: any) {
       inline: overrides.inline,
       scrollMode: overrides.scrollMode,
       boundary: overrides.boundary,
-      behavior: actions =>
+      behavior: (actions) =>
         Promise.all(
-          actions.reduce((results: Promise<SmoothScrollAction>[], { el, left, top }) => {
-            const startLeft = el.scrollLeft
-            const startTop = el.scrollTop
-            if (startLeft === left && startTop === top) {
-              return results
-            }
+          actions.reduce(
+            (results: Promise<SmoothScrollAction>[], { el, left, top }) => {
+              const startLeft = el.scrollLeft
+              const startTop = el.scrollTop
+              if (startLeft === left && startTop === top) {
+                return results
+              }
 
-            return [
-              ...results,
-              new Promise(resolve => {
-                return smoothScroll(
-                  el,
-                  left,
-                  top,
-                  overrides.duration,
-                  overrides.ease,
-                  () =>
-                    resolve({
-                      el,
-                      left: [startLeft, left],
-                      top: [startTop, top],
-                    }),
-                  overrides.onScrollChange
-                )
-              }),
-            ]
-          }, [])
+              return [
+                ...results,
+                new Promise((resolve) => {
+                  return smoothScroll(
+                    el,
+                    left,
+                    top,
+                    overrides.duration,
+                    overrides.ease,
+                    () =>
+                      resolve({
+                        el,
+                        left: [startLeft, left],
+                        top: [startTop, top],
+                      }),
+                    overrides.onScrollChange
+                  )
+                }),
+              ]
+            },
+            []
+          )
         ),
     })
   }
