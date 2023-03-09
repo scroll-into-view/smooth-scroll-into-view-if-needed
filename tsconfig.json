@@ -1,22 +1,20 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "es2015",
+    "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "node",
-    "esModuleInterop": true,
     "declaration": true,
     "rootDir": "src",
-    "declarationDir": "typings",
+    "outDir": "dist",
+    "declarationDir": "dist",
+    "emitDeclarationOnly": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "strictNullChecks": true,
     "skipLibCheck": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strict": true,
-    "noImplicitAny": true,
-    "alwaysStrict": true,
-    "lib": ["es5", "es2015.promise", "dom"]
+    "lib": ["dom", "dom.iterable", "esnext"]
   },
-  "exclude": ["tests", "package.config.ts"]
+  "exclude": ["node_modules", "dist", "tests", "package.config.ts"]
 }

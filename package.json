@@ -3,69 +3,58 @@
   "description": "Ponyfill for smooth scrolling elements into view (if needed!)",
   "license": "MIT",
   "author": "Cody Olsen",
-  "homepage": "https://scroll-into-view-if-needed.netlify.com/",
+  "homepage": "https://scroll-into-view.dev",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stipsan/smooth-scroll-into-view-if-needed.git"
+    "url": "git+https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed.git"
   },
   "version": "1.0.1-alpha.3",
-  "main": "index.js",
-  "module": "es/index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "source": "./src/index.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "files": [
-    "es",
-    "typings",
-    "umd"
+    "dist",
+    "src"
   ],
   "scripts": {
-    "prebuild": "yarn clean",
-    "build": "yarn build:d.ts && yarn build:cjs && yarn build:es && yarn build:umd && yarn build:umd.min",
-    "build:cjs": "BABEL_ENV=cjs babel src -d . --extensions '.ts'",
-    "build:d.ts": "tsc --emitDeclarationOnly",
-    "build:es": "BABEL_ENV=es babel src -d es --extensions '.ts'",
-    "build:umd": "BABEL_ENV=umd NODE_ENV=development rollup -c -f umd -o umd/smooth-scroll-into-view-if-needed.js",
-    "build:umd.min": "BABEL_ENV=umd NODE_ENV=production rollup -c -f umd -o umd/smooth-scroll-into-view-if-needed.min.js",
-    "clean": "rimraf 'umd' 'es' 'typings'",
-    "precommit": "lint-staged",
-    "dev": "concurrently 'tsc --noEmit --watch' 'yarn build:cjs --watch' 'yarn build:es --watch' 'yarn build:umd --watch' 'yarn build:umd.min --watch'",
-    "prepublishOnly": "unset npm_config_cafile && yarn build",
     "test": "jest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prebuild": "npm run clean",
+    "build": "pkg build --strict",
+    "clean": "npx rimraf 'dist'",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "scroll-into-view-if-needed": "^2.2.28"
+    "scroll-into-view-if-needed": "^3.0.6"
   },
   "devDependencies": {
-    "@babel/cli": "7.16.0",
-    "@babel/core": "7.16.0",
-    "@babel/plugin-external-helpers": "7.16.0",
-    "@babel/preset-env": "7.16.0",
-    "@babel/preset-typescript": "7.16.0",
+    "@sanity/pkg-utils": "^2.2.8",
     "@sanity/semantic-release-preset": "^4.0.0",
-    "@types/jest": "26.0.24",
-    "babel-eslint": "10.1.0",
-    "babel-plugin-add-module-exports": "1.0.4",
-    "babel-plugin-dev-expression": "0.2.3",
-    "concurrently": "6.4.0",
-    "eslint": "7.32.0",
-    "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-import": "2.25.3",
-    "eslint-plugin-react": "7.27.0",
-    "husky": "5.2.0",
-    "jest": "26.6.3",
-    "jest-junit": "12.3.0",
-    "lint-staged": "10.5.4",
-    "prettier": "2.4.1",
-    "prettier-package-json": "2.6.0",
+    "@types/jest": "^26.0.24",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-react": "^7.27.0",
+    "jest": "^26.6.3",
+    "jest-junit": "^12.3.0",
+    "prettier": "^2.8.4",
+    "prettier-package-json": "^2.8.0",
     "rimraf": "^3.0.2",
-    "rollup": "2.60.0",
-    "rollup-plugin-babel": "4.4.0",
-    "rollup-plugin-commonjs": "10.1.0",
-    "rollup-plugin-node-resolve": "5.2.0",
-    "rollup-plugin-replace": "2.2.0",
-    "rollup-plugin-terser": "7.0.2",
     "semantic-release": "^20.1.1",
-    "ts-jest": "26.5.6",
-    "typescript": "4.4.4"
+    "ts-jest": "^26.5.6",
+    "typescript": "^4.4.4"
   },
   "keywords": [
     "behavior-smooth",
@@ -116,36 +105,6 @@
       ]
     ]
   },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.{ts,tsx}": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.json": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.css": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.md": [
-      "prettier --write",
-      "git add"
-    ],
-    "**/package.json": [
-      "prettier-package-json --write",
-      "git add"
-    ],
-    "**/.babelrc": [
-      "prettier --write",
-      "git add"
-    ]
-  },
   "prettier": {
     "semi": false,
     "singleQuote": true,
@@ -159,11 +118,5 @@
       }
     ]
   },
-  "release": {
-    "prepare": [
-      "@semantic-release/npm"
-    ]
-  },
-  "typings": "typings/index.d.ts",
   "sideEffects": false
 }
