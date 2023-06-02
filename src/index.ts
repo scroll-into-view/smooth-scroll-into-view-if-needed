@@ -16,7 +16,7 @@ type OnScrollChangeCallback = (scrollState: {
   top: number
 }) => void
 
-export interface SmoothBehaviorOptions extends Options {
+export type SmoothBehaviorOptions = Options & {
   behavior?: 'smooth'
   duration?: number
   ease?: CustomEasing
