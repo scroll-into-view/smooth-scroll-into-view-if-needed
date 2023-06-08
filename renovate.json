@@ -2,7 +2,7 @@
   "extends": ["github>stipsan/renovate-presets:auto"],
   "packageRules": [
     {
-      "packageNames": ["scroll-into-view-if-needed"],
+      "matchPackageNames": ["scroll-into-view-if-needed"],
       "semanticCommitType": "fix"
     }
   ]
