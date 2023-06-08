@@ -22,7 +22,7 @@ version: 2
 jobs:
   Typecheck:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:16
     steps:
       - checkout
       - restore-cache: *restore-cache
@@ -31,7 +31,7 @@ jobs:
 
   Build:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:16
     steps:
       - checkout
       - restore-cache: *restore-cache
@@ -42,7 +42,7 @@ jobs:
 
   Test:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:16
     steps:
       - checkout
       - restore-cache: *restore-cache
@@ -54,7 +54,7 @@ jobs:
 
   Semantic Release:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:16
     steps:
       - checkout
       - restore-cache: *restore-cache
