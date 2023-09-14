@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed/compare/v2.0.0...v2.0.1) (2023-09-14)
+
+### Bug Fixes
+
+- **deps:** bump `scroll-into-view-if-needed` to v3.1.0 ([cda553d](https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed/commit/cda553d8a4d55647262e13b9191f422053df6915))
+
 ## [2.0.0](https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed/compare/v1.1.33...v2.0.0) (2023-03-09)
 
 ### ⚠ BREAKING CHANGES
