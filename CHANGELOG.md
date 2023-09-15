@@ -5,6 +5,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed/compare/v2.0.1...v2.0.2) (2023-09-15)
+
+### Bug Fixes
+
+- SmoothBehaviorOptions is updated to be a type alias ([237c52f](https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed/commit/237c52ffc4ee4eb3f364f5c7462c8d7deed3aad9))
+
 ## [2.0.1](https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed/compare/v2.0.0...v2.0.1) (2023-09-14)
 
 ### Bug Fixes
