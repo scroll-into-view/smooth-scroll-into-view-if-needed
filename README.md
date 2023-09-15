@@ -136,4 +136,3 @@ scrollIntoView(node, {
 [size-badge]: http://img.badgesize.io/https://unpkg.com/smooth-scroll-into-view-if-needed/umd/smooth-scroll-into-view-if-needed.min.js?label=size&style=flat-square
 [unpkg-dist]: https://unpkg.com/smooth-scroll-into-view-if-needed/umd/
 [module-formats-badge]: https://img.shields.io/badge/module%20formats-umd%2C%20cjs%2C%20es-green.svg?style=flat-square
-
