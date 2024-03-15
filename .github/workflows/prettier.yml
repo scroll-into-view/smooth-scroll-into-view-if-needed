@@ -15,20 +15,20 @@ jobs:
     name: 🤔
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
-      - uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
+      - uses: actions/setup-node@1a4442cacd436585916779262731d5b162bc6ec7 # v3
         with:
           cache: npm
           node-version: lts/*
       - run: npm ci --ignore-scripts --only-dev
-      - uses: actions/cache@6998d139ddd3e68c71e9e398d8e40b71a2f39812 # v3
+      - uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
         with:
           path: node_modules/.cache/prettier/.prettier-cache
           key: prettier-${{ hashFiles('package-lock.json') }}-${{ hashFiles('.gitignore') }}
       - name: check if workflows needs prettier
         run: npx prettier --cache --check ".github/workflows/**/*.yml" || (echo "An action can't make changes to actions, you'll have to run prettier manually" && exit 1)
       - run: npx prettier --ignore-path .gitignore --cache --write .
-      - uses: EndBug/add-and-commit@61a88be553afe4206585b31aa72387c64295d08b # tag=v9
+      - uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5 # v9
         with:
           default_author: github_actions
           commit: --no-verify
