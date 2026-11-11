@@ -1,0 +1,5 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  // Loaded by `vp pack` (tsdown) for its `publint` and `attw` checks in vite.config.ts
+  "ignoreDependencies": ["publint", "@arethetypeswrong/core"],
+}

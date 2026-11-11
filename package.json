@@ -11,18 +11,12 @@
   "version": "2.1.0",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "source": "./src/index.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "default": "./dist/index.js"
-    },
+    ".": "./dist/index.js",
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "src"
@@ -38,11 +32,13 @@
     "scroll-into-view-if-needed": "^3.1.0"
   },
   "devDependencies": {
+    "@arethetypeswrong/core": "^0.18.5",
     "@changesets/changelog-github": "^1.0.1",
     "@changesets/cli": "^3.0.3",
     "@vitest/coverage-v8": "catalog:",
     "jsdom": "^31.0.0",
     "knip": "^6.45.0",
+    "publint": "^0.3.25",
     "vite-plus": "catalog:",
     "vitest": "catalog:"
   },
@@ -60,11 +56,6 @@
     "smoothscroll",
     "typescript"
   ],
-  "browserify": {
-    "transform": [
-      "loose-envify"
-    ]
-  },
   "bundlesize": [
     {
       "path": "./umd/smooth-scroll-into-view-if-needed.min.js",
