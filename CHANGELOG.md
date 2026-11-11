@@ -1,5 +1,11 @@
 <!-- markdownlint-disable --><!-- textlint-disable -->
 
+## 2.1.0
+
+### Minor Changes
+
+- [#1069](https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed/pull/1069) [`eca543a`](https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed/commit/eca543aa7d93e12056eb5481e6ce74ee1df4f78d) Thanks [@stipsan](https://github.com/stipsan)! - Require Node.js 26 (current LTS) or later, and publish to npm with trusted publishing (OIDC) and provenance
+
 # 📓 Changelog
 
 All notable changes to this project will be documented in this file. See
