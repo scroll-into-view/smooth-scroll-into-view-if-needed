@@ -32,7 +32,8 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "build": "pnpm run clean && pkg build --strict",
     "clean": "rimraf 'dist'",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "release": "pnpm build && changeset publish"
   },
   "dependencies": {
     "scroll-into-view-if-needed": "^3.1.0"
