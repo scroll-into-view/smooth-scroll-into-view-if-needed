@@ -1,6 +1,8 @@
 catalog:
   vite: npm:@voidzero-dev/vite-plus-core@1.6.0
   vite-plus: 1.6.0
+  vitest: 5.1.0
+  '@vitest/coverage-v8': 5.1.0
 minimumReleaseAgeExclude:
   - '@voidzero-dev/vite-plus-core@1.6.0'
   - '@voidzero-dev/vite-plus-darwin-arm64@1.6.0'
@@ -14,8 +16,11 @@ minimumReleaseAgeExclude:
   - vite-plus@1.6.0
 overrides:
   vite@*: 'catalog:'
+  vitest@*: 'catalog:'
 peerDependencyRules:
   allowAny:
     - vite
+    - vitest
   allowedVersions:
     vite: '*'
+    vitest: '*'

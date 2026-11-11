@@ -40,9 +40,11 @@
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",
     "@changesets/cli": "^3.0.3",
+    "@vitest/coverage-v8": "catalog:",
     "jsdom": "^31.0.0",
     "knip": "^6.45.0",
-    "vite-plus": "catalog:"
+    "vite-plus": "catalog:",
+    "vitest": "catalog:"
   },
   "keywords": [
     "behavior-smooth",
