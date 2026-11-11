@@ -4,13 +4,13 @@ import scrollIntoView from '../src'
 // 1. Default smooth scrolling, return empty array to ensure no scrolling is attempted.
 // 2. Falling back to scroll-into-view-if-needed, simulate an array over scroll actions
 // This enables tests to know which of the two cases is in effect, and verify if it's correct.
-jest.mock(
-  'scroll-into-view-if-needed',
-  () => (_target: Element, options: any) =>
+jest.mock('scroll-into-view-if-needed', () => ({
+  __esModule: true,
+  default: (_target: Element, options: any) =>
     typeof options.behavior == 'function'
       ? options.behavior([])
-      : [{ el: {}, top: 0, left: 0 }]
-)
+      : [{ el: {}, top: 0, left: 0 }],
+}))
 
 test('options is optional', () => {
   expect.assertions(1)

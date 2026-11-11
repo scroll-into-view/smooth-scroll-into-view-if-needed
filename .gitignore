@@ -65,3 +65,5 @@ reports
 /*.js
 !.babelrc.js
 !rollup.config.js
+# jest-junit
+junit.xml
