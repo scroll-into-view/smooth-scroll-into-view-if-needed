@@ -28,12 +28,11 @@
     "src"
   ],
   "scripts": {
-    "test": "jest",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "build": "pnpm run clean && pkg build --strict",
-    "clean": "rimraf 'dist'",
-    "prepublishOnly": "pnpm run build",
-    "release": "pnpm build && changeset publish"
+    "test": "vp test",
+    "build": "vp pack",
+    "prepublishOnly": "vp pack",
+    "release": "vp pack && changeset publish",
+    "prepare": "vp config"
   },
   "dependencies": {
     "scroll-into-view-if-needed": "^3.1.0"
@@ -41,20 +40,8 @@
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",
     "@changesets/cli": "^3.0.3",
-    "@sanity/pkg-utils": "^2.2.8",
-    "@types/jest": "^26.0.24",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-react": "^7.27.0",
-    "jest": "^26.6.3",
-    "jest-junit": "^12.3.0",
-    "prettier": "^2.8.4",
-    "prettier-package-json": "^2.8.0",
-    "rimraf": "^3.0.2",
-    "ts-jest": "^26.5.6",
-    "typescript": "^4.4.4"
+    "jsdom": "^31.0.0",
+    "vite-plus": "catalog:"
   },
   "keywords": [
     "behavior-smooth",
@@ -82,42 +69,6 @@
       "compression": "none"
     }
   ],
-  "jest": {
-    "transform": {
-      "^.+\\.ts$": "ts-jest"
-    },
-    "testRegex": "(/tests/.*|(\\.|/)(test|spec))\\.(js|ts)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ],
-    "reporters": [
-      "default",
-      [
-        "jest-junit",
-        {
-          "output": "reports/jest/results.xml"
-        }
-      ]
-    ]
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "overrides": [
-      {
-        "files": ".babelrc",
-        "options": {
-          "parser": "json"
-        }
-      }
-    ]
-  },
   "sideEffects": false,
   "packageManager": "pnpm@12.18.0",
   "publishConfig": {

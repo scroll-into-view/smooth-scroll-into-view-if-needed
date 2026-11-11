@@ -1,10 +1,11 @@
+import { expect, test, vi } from 'vite-plus/test'
 import scrollIntoView from '../src'
 
 // This mock supports two scenarios:
 // 1. Default smooth scrolling, return empty array to ensure no scrolling is attempted.
 // 2. Falling back to scroll-into-view-if-needed, simulate an array over scroll actions
 // This enables tests to know which of the two cases is in effect, and verify if it's correct.
-jest.mock('scroll-into-view-if-needed', () => ({
+vi.mock('scroll-into-view-if-needed', () => ({
   __esModule: true,
   default: (_target: Element, options: any) =>
     typeof options.behavior == 'function'
