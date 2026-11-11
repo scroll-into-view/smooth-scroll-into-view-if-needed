@@ -37,3 +37,11 @@ test('other behavior options still returns a promise', () => {
     scrollIntoView(document.body, { behavior: 'auto' })
   ).resolves.toEqual([{ el: {}, top: 0, left: 0 }])
 })
+
+test('custom behavior accepts container and preserves its return type', () => {
+  const value: number = scrollIntoView(document.body, {
+    container: 'nearest',
+    behavior: () => 42,
+  })
+  expect(value).toBe(42)
+})
