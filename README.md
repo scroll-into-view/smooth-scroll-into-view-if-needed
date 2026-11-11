@@ -7,21 +7,13 @@
 This is an addon to [`scroll-into-view-if-needed`](https://www.npmjs.com/package/scroll-into-view-if-needed) that [ponyfills](https://ponyfill.com) smooth scrolling.
 And while `scroll-into-view-if-needed` use the same default options as browsers and the spec does, this library is a bit more opinionated and include bonus features that help you build great UIs.
 
-## [Demo](https://scroll-into-view-if-needed.netlify.com/)
+## [Demo](https://scroll-into-view.dev/)
 
 ## Install
 
 ```bash
-yarn add smooth-scroll-into-view-if-needed
+npm install smooth-scroll-into-view-if-needed
 ```
-
-The UMD build is also available on [unpkg](https://unpkg.com/smooth-scroll-into-view-if-needed/umd/):
-
-```html
-<script src="https://unpkg.com/smooth-scroll-into-view-if-needed/umd/smooth-scroll-into-view-if-needed.min.js"></script>
-```
-
-You can find the library on `window.scrollIntoView`.
 
 ## Usage
 
@@ -39,7 +31,7 @@ scrollIntoView(node, {
   inline: 'nearest',
 })
 
-// a promise is always returned to help reduce boilerplate
+// Smooth and standard behaviors return a promise. Custom callbacks keep their return type.
 const sequence = async () => {
   const slide = document.getElementById('slide-3')
   // First smooth scroll to hero
@@ -55,11 +47,13 @@ This library rely on `Promise` and `requestAnimationFrame`. This library does no
 
 ## API
 
-Check the full API in [`scroll-into-view-if-needed`](https://github.com/stipsan/scroll-into-view-if-needed#api).
+Check the full API in [`scroll-into-view-if-needed`](https://github.com/scroll-into-view/scroll-into-view-if-needed#api).
 
 ### scrollIntoView(target, [options]) => Promise
 
-`scroll-into-view-if-needed` does not return anything, while this library will return a Promise that is resolved when all of the scrolling boxes are finished scrolling.
+This add-on's default/smooth behavior returns `Promise<SmoothScrollAction[]>` when its own animation finishes. Empty and disconnected targets resolve to `[]`. `duration: 0` completes immediately.
+
+The updated base ponyfill preserves native `Promise<ScrollResult>` values where supported. This add-on forwards those results for `auto`/`instant`, wrapped in a promise; legacy native void results resolve to undefined and do not guarantee smooth-scroll completion. Custom behavior return values pass through unchanged, including synchronous values. The custom-animation action array is distinct from the native `{ interrupted: boolean }` result.
 
 > The ability to cancel animations will be added in a future version.
 
@@ -69,18 +63,18 @@ Type: `Object`
 
 #### behavior
 
-Type: `'auto' | 'smooth' | Function`<br> Default: `'smooth'`
+Type: `'auto' | 'instant' | 'smooth' | Function`<br> Default: `'smooth'`
 
 This option deviates from `scroll-into-view-if-needed` in two ways.
 
 - The default value is `smooth` instead of `auto`
 - Using `smooth` adds it to browsers that miss it, and overrides the native smooth scrolling in the browsers that have it to ensure the scrolling is consistent in any browser.
 
-The options `auto` or `Function` behaves exactly like in `scroll-into-view-if-needed`.
+`auto` and `instant` delegate to native scrolling. Custom callbacks receive the same computed actions and preserve their return values.
 
 #### duration
 
-Type: `number`<br> Default: `300`
+Type: `number`<br> Default: `600`
 
 > Introduced in `v1.1.0`
 
@@ -132,3 +126,9 @@ scrollIntoView(node, {
 [gzip-badge]: http://img.badgesize.io/https://unpkg.com/smooth-scroll-into-view-if-needed/dist/index.js?compression=gzip&label=gzip%20size&style=flat-square
 [size-badge]: http://img.badgesize.io/https://unpkg.com/smooth-scroll-into-view-if-needed/dist/index.js?label=size&style=flat-square
 [unpkg-dist]: https://unpkg.com/smooth-scroll-into-view-if-needed/dist/
+
+## Current CSSOM features
+
+`container: 'nearest'`, logical alignment, scroll margins and scroll padding are forwarded to the base ponyfill/engine. `scrollMode: 'if-needed'` remains a library extension inspired by an open proposal. Full support requires the coordinated engine and base-ponyfill updates; release those first before publishing this add-on. The dependency range accepts both the current base release and its upcoming major.
+
+The native `focus()` API remains separate: call `focus({ preventScroll: true })` before scrolling when you need explicit control. See the engine's [standards review](https://github.com/scroll-into-view/compute-scroll-into-view/blob/main/docs/cssom-status.md) for proposal status, native promise compatibility, and remaining limits.
