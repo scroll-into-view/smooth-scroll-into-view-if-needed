@@ -1,10 +1,8 @@
-[![CircleCI Status](https://img.shields.io/circleci/project/github/stipsan/smooth-scroll-into-view-if-needed.svg?style=flat-square)](https://circleci.com/gh/stipsan/smooth-scroll-into-view-if-needed)
 [![npm stat](https://img.shields.io/npm/dm/smooth-scroll-into-view-if-needed.svg?style=flat-square)](https://npm-stat.com/charts.html?package=smooth-scroll-into-view-if-needed)
 [![npm version](https://img.shields.io/npm/v/smooth-scroll-into-view-if-needed.svg?style=flat-square)](https://www.npmjs.com/package/smooth-scroll-into-view-if-needed)
 [![gzip size][gzip-badge]][unpkg-dist]
 [![size][size-badge]][unpkg-dist]
 [![module formats: umd, cjs, and es][module-formats-badge]][unpkg-dist]
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
 ![smooth-scroll-into-view-if-needed](https://user-images.githubusercontent.com/81981/39496447-c1153942-4d9e-11e8-92c8-ad5ac0e406ac.png)
 
 This is an addon to [`scroll-into-view-if-needed`](https://www.npmjs.com/package/scroll-into-view-if-needed) that [ponyfills](https://ponyfill.com) smooth scrolling.
