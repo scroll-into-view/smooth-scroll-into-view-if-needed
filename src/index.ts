@@ -136,8 +136,8 @@ function scroll<T>(target: Element, options?: any) {
       skipOverflowHiddenElements: overrides.skipOverflowHiddenElements,
       behavior: (actions) =>
         Promise.all(
-          actions.reduce(
-            (results: Promise<SmoothScrollAction>[], { el, left, top }) => {
+          actions.reduce<Promise<SmoothScrollAction>[]>(
+            (results, { el, left, top }) => {
               const startLeft = el.scrollLeft
               const startTop = el.scrollTop
               if (startLeft === left && startTop === top) {
@@ -146,7 +146,7 @@ function scroll<T>(target: Element, options?: any) {
 
               return [
                 ...results,
-                new Promise((resolve) => {
+                new Promise<SmoothScrollAction>((resolve) => {
                   return smoothScroll(
                     el,
                     left,
