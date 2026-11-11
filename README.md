@@ -2,7 +2,6 @@
 [![npm version](https://img.shields.io/npm/v/smooth-scroll-into-view-if-needed.svg?style=flat-square)](https://www.npmjs.com/package/smooth-scroll-into-view-if-needed)
 [![gzip size][gzip-badge]][unpkg-dist]
 [![size][size-badge]][unpkg-dist]
-[![module formats: umd, cjs, and es][module-formats-badge]][unpkg-dist]
 ![smooth-scroll-into-view-if-needed](https://user-images.githubusercontent.com/81981/39496447-c1153942-4d9e-11e8-92c8-ad5ac0e406ac.png)
 
 This is an addon to [`scroll-into-view-if-needed`](https://www.npmjs.com/package/scroll-into-view-if-needed) that [ponyfills](https://ponyfill.com) smooth scrolling.
@@ -130,7 +129,6 @@ scrollIntoView(node, {
 
 ## More documentation will be added
 
-[gzip-badge]: http://img.badgesize.io/https://unpkg.com/smooth-scroll-into-view-if-needed/umd/smooth-scroll-into-view-if-needed.min.js?compression=gzip&label=gzip%20size&style=flat-square
-[size-badge]: http://img.badgesize.io/https://unpkg.com/smooth-scroll-into-view-if-needed/umd/smooth-scroll-into-view-if-needed.min.js?label=size&style=flat-square
-[unpkg-dist]: https://unpkg.com/smooth-scroll-into-view-if-needed/umd/
-[module-formats-badge]: https://img.shields.io/badge/module%20formats-umd%2C%20cjs%2C%20es-green.svg?style=flat-square
+[gzip-badge]: http://img.badgesize.io/https://unpkg.com/smooth-scroll-into-view-if-needed/dist/index.js?compression=gzip&label=gzip%20size&style=flat-square
+[size-badge]: http://img.badgesize.io/https://unpkg.com/smooth-scroll-into-view-if-needed/dist/index.js?label=size&style=flat-square
+[unpkg-dist]: https://unpkg.com/smooth-scroll-into-view-if-needed/dist/
