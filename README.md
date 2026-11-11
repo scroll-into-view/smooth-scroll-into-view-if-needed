@@ -2,26 +2,27 @@
 [![npm version](https://img.shields.io/npm/v/smooth-scroll-into-view-if-needed.svg?style=flat-square)](https://www.npmjs.com/package/smooth-scroll-into-view-if-needed)
 [![gzip size][gzip-badge]][unpkg-dist]
 [![size][size-badge]][unpkg-dist]
+
 ![smooth-scroll-into-view-if-needed](https://user-images.githubusercontent.com/81981/39496447-c1153942-4d9e-11e8-92c8-ad5ac0e406ac.png)
 
 This is an addon to [`scroll-into-view-if-needed`](https://www.npmjs.com/package/scroll-into-view-if-needed) that [ponyfills](https://ponyfill.com) smooth scrolling.
-And while `scroll-into-view-if-needed` use the same default options as browsers and the spec does, this library is a bit more opinionated and include bonus features that help you build great UIs.
+And while `scroll-into-view-if-needed` uses the same default options as browsers and the spec does, this library is a bit more opinionated and includes bonus features that help you build great UIs.
 
-## [Demo](https://scroll-into-view-if-needed.netlify.com/)
+## [Demo](https://scroll-into-view.dev)
 
 ## Install
 
 ```bash
-yarn add smooth-scroll-into-view-if-needed
+npm i smooth-scroll-into-view-if-needed
 ```
 
-The UMD build is also available on [unpkg](https://unpkg.com/smooth-scroll-into-view-if-needed/umd/):
+You can also use it from a CDN:
 
-```html
-<script src="https://unpkg.com/smooth-scroll-into-view-if-needed/umd/smooth-scroll-into-view-if-needed.min.js"></script>
+```js
+const { default: scrollIntoView } = await import(
+  'https://esm.sh/smooth-scroll-into-view-if-needed'
+)
 ```
-
-You can find the library on `window.scrollIntoView`.
 
 ## Usage
 
@@ -51,11 +52,11 @@ const sequence = async () => {
 
 ## Polyfills
 
-This library rely on `Promise` and `requestAnimationFrame`. This library does not ship with polyfills for these to keep bundlesizes as low as possible.
+This library relies on `Promise` and `requestAnimationFrame`, which are available in all modern browsers. It does not ship with polyfills for these to keep bundlesizes as low as possible.
 
 ## API
 
-Check the full API in [`scroll-into-view-if-needed`](https://github.com/stipsan/scroll-into-view-if-needed#api).
+Check the full API in [`scroll-into-view-if-needed`](https://github.com/scroll-into-view/scroll-into-view-if-needed#api).
 
 ### scrollIntoView(target, [options]) => Promise
 
@@ -80,12 +81,12 @@ The options `auto` or `Function` behaves exactly like in `scroll-into-view-if-ne
 
 #### duration
 
-Type: `number`<br> Default: `300`
+Type: `number`<br> Default: `600`
 
 > Introduced in `v1.1.0`
 
-This setting is not a hard limit.
-The duration of a scroll differs depending on how many elements is scrolled, and the capabilities of the browser.
+The duration of the animation in milliseconds. This setting is not a hard limit.
+The duration of a scroll differs depending on how many elements are scrolled, and the capabilities of the browser.
 On mobile the browser might pause or throttle the animation if the user switches to another tab.
 And there might be nothing to scroll.
 No matter the scenario a Promise is returned so you can await on it.
@@ -123,12 +124,30 @@ scrollIntoView(node, {
 })
 ```
 
+#### onScrollChange
+
+Type: `Function`
+
+> Introduced in `v2.0.0`
+
+Called on every animation frame for each element that is scrolled, useful for syncing other UI with the scroll position:
+
+```typescript
+scrollIntoView(node, {
+  onScrollChange: ({ target, elapsed, value, left, top }) => {
+    // target: the element being scrolled
+    // elapsed: progress of the animation, from 0 to 1
+    // value: `elapsed` with the `ease` function applied
+    // left, top: the scrollLeft and scrollTop that were just set on `target`
+    console.log(target, elapsed, value, left, top)
+  },
+})
+```
+
 ## Credits
 
 - [smoothscroll](https://github.com/iamdustan/smoothscroll) for the reference implementation of smooth scrolling.
 
-## More documentation will be added
-
-[gzip-badge]: http://img.badgesize.io/https://unpkg.com/smooth-scroll-into-view-if-needed/dist/index.js?compression=gzip&label=gzip%20size&style=flat-square
-[size-badge]: http://img.badgesize.io/https://unpkg.com/smooth-scroll-into-view-if-needed/dist/index.js?label=size&style=flat-square
+[gzip-badge]: https://img.shields.io/bundlephobia/minzip/smooth-scroll-into-view-if-needed?label=gzip%20size&style=flat-square
+[size-badge]: https://img.shields.io/bundlephobia/min/smooth-scroll-into-view-if-needed?label=size&style=flat-square
 [unpkg-dist]: https://unpkg.com/smooth-scroll-into-view-if-needed/dist/
