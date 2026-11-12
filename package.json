@@ -46,7 +46,7 @@
     "node 12"
   ],
   "dependencies": {
-    "scroll-into-view-if-needed": "^3.1.0"
+    "scroll-into-view-if-needed": "^3.2.1"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",

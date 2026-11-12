@@ -1,2 +1,5 @@
 allowBuilds:
   esbuild: true
+minimumReleaseAgeExclude:
+  - compute-scroll-into-view@3.2.2
+  - scroll-into-view-if-needed@3.2.1
