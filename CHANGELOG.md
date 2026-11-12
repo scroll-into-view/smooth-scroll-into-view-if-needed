@@ -1,5 +1,11 @@
 # smooth-scroll-into-view-if-needed
 
+## 2.1.2
+
+### Patch Changes
+
+- [#1085](https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed/pull/1085) [`8657c2b`](https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed/commit/8657c2b1d5825872715f711e31e2a04e94b93d96) Thanks [@tembo](https://github.com/apps/tembo)! - Update `scroll-into-view-if-needed` to `^3.2.1`
+
 ## 2.1.1
 
 ### Patch Changes
