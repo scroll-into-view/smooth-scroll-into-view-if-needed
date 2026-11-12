@@ -1,5 +1,13 @@
 # smooth-scroll-into-view-if-needed
 
+## 2.1.1
+
+### Patch Changes
+
+- [#1083](https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed/pull/1083) [`7aca731`](https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed/commit/7aca73131eb12c5a9bfa327fdbc117c6e8a73295) Thanks [@tembo](https://github.com/apps/tembo)! - Compile the published bundles to ES2019 syntax again. The previous release shipped optional chaining (`?.`) and nullish coalescing (`??`) because the browserslist targets drifted, which broke Webpack 4 and other older toolchains ([scroll-into-view-if-needed#1235](https://github.com/scroll-into-view/scroll-into-view-if-needed/issues/1235)). The build targets are now pinned and the build fails if the output isn't ES2019-compatible.
+
+- [#1083](https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed/pull/1083) [`7aca731`](https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed/commit/7aca73131eb12c5a9bfa327fdbc117c6e8a73295) Thanks [@tembo](https://github.com/apps/tembo)! - Remove the `engines.node` requirement added in the previous release. Requiring Node.js 26 was unintentionally breaking for consumers on older Node.js versions, and as a browser library this package has no Node.js runtime requirement ([compute-scroll-into-view#928](https://github.com/scroll-into-view/compute-scroll-into-view/issues/928))
+
 ## 2.1.0
 
 ### Minor Changes
