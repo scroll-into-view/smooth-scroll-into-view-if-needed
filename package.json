@@ -30,11 +30,21 @@
   "scripts": {
     "test": "jest",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
-    "build": "pnpm run clean && pkg build --strict",
+    "build": "pnpm run clean && pkg build --strict && pnpm run check:es",
+    "check:es": "es-check es2019 dist/index.cjs && es-check es2019 --module dist/index.js",
     "clean": "rimraf 'dist'",
     "prepublishOnly": "pnpm run build",
     "release": "pnpm build && changeset publish"
   },
+  "browserslist": [
+    "chrome 79",
+    "edge 79",
+    "firefox 72",
+    "ios_saf 13",
+    "safari 13",
+    "opera 66",
+    "node 12"
+  ],
   "dependencies": {
     "scroll-into-view-if-needed": "^3.1.0"
   },
@@ -44,6 +54,7 @@
     "@sanity/pkg-utils": "^2.2.8",
     "@types/jest": "^26.0.24",
     "babel-eslint": "^10.1.0",
+    "es-check": "^9.8.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
@@ -123,8 +134,5 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "engines": {
-    "node": ">=26"
   }
 }
