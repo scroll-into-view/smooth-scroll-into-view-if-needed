@@ -36,6 +36,12 @@ export default defineConfig({
   test: {
     // Jest 26 ran these tests in jsdom by default
     environment: 'jsdom',
+    coverage: {
+      provider: 'v8',
+      include: ['src/**'],
+      // The coverage when this was added, so CI fails if it drops
+      thresholds: { statements: 100, branches: 95, functions: 100, lines: 100 },
+    },
   },
   pack: {
     entry: ['src/index.ts'],

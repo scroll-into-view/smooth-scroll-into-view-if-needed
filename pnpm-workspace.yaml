@@ -1,6 +1,8 @@
 catalog:
   vite: npm:@voidzero-dev/vite-plus-core@1.6.0
   vite-plus: 1.6.0
+  vitest: 5.1.0
+  '@vitest/coverage-v8': 5.1.0
 minimumReleaseAgeExclude:
   - compute-scroll-into-view@3.2.2
   - scroll-into-view-if-needed@3.2.1
@@ -16,8 +18,11 @@ minimumReleaseAgeExclude:
   - vite-plus@1.6.0
 overrides:
   vite@*: 'catalog:'
+  vitest@*: 'catalog:'
 peerDependencyRules:
   allowAny:
     - vite
+    - vitest
   allowedVersions:
     vite: '*'
+    vitest: '*'
