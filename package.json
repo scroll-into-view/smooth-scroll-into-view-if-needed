@@ -29,10 +29,10 @@
   ],
   "scripts": {
     "test": "vp test",
-    "build": "vp pack && pnpm run check:es",
+    "build": "vp pack && vp run check:es",
     "check:es": "es-check es2019 dist/index.cjs && es-check es2019 --module dist/index.js",
-    "prepublishOnly": "pnpm run build",
-    "release": "pnpm run build && changeset publish",
+    "prepublishOnly": "vp run build",
+    "release": "vp run build && changeset publish",
     "prepare": "vp config"
   },
   "dependencies": {
