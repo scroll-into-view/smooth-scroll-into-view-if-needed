@@ -58,6 +58,8 @@ const sequence = async () => {
 }
 ```
 
+The promise interface allows more advanced use cases, like a custom waterfall effect seen here: https://codepen.io/stipsan/pen/gjwWXV
+
 ## Polyfills
 
 This library relies on `Promise` and `requestAnimationFrame`, which are available in all modern browsers. It does not ship with polyfills for these to keep bundlesizes as low as possible.
@@ -72,7 +74,21 @@ Check the full API in [`scroll-into-view-if-needed`](https://github.com/scroll-i
 
 With the default `smooth` behavior the Promise resolves to a `SmoothScrollAction[]`, one entry for each element that was scrolled, with the `[start, end]` of its `left` and `top`. It resolves to `[]` when there's nothing to scroll, or when the target isn't connected to the document. `auto` resolves to `undefined`, and a custom `behavior` function's return value is returned as is.
 
-> The ability to cancel animations will be added in a future version.
+Pass an [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) as `signal` to cancel the animation. The elements stop where they are, and the Promise rejects with the signal's abort reason, following the DOM's [guidance for aborting ongoing activities](https://dom.spec.whatwg.org/#aborting-ongoing-activities):
+
+```js
+const controller = new AbortController()
+// Stop scrolling when the user starts scrolling themselves
+addEventListener('wheel', () => controller.abort(), { once: true })
+
+try {
+  await scrollIntoView(node, { signal: controller.signal })
+} catch (error) {
+  if (error.name !== 'AbortError') throw error
+}
+```
+
+A signal that's already aborted rejects right away, without scrolling.
 
 ### options
 

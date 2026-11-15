@@ -21,6 +21,11 @@ export type SmoothBehaviorOptions = Options & {
   duration?: number
   ease?: CustomEasing
   onScrollChange?: OnScrollChangeCallback
+  /**
+   * Stops the animation when aborted, and rejects the returned Promise with
+   * the signal's abort reason
+   */
+  signal?: AbortSignal
 }
 
 // Memoize so we're much more friendly to non-dom envs
@@ -51,8 +56,12 @@ type Context = {
   duration: number
   ease: CustomEasing
   cb: Function
+  signal?: AbortSignal
 }
 function step(context: Context) {
+  if (context.signal && context.signal.aborted) {
+    return
+  }
   const time = now()
   const elapsed =
     context.duration > 0
@@ -82,7 +91,8 @@ function smoothScroll(
   duration = 600,
   ease: CustomEasing = (t) => 1 + --t * t * t * t * t,
   cb: Function,
-  onScrollChange?: OnScrollChangeCallback
+  onScrollChange?: OnScrollChangeCallback,
+  signal?: AbortSignal
 ) {
   // define scroll context
   const scrollable = el
@@ -123,12 +133,86 @@ function smoothScroll(
     duration,
     ease,
     cb,
+    signal,
   })
+}
+
+// `AbortSignal.reason` is newer than `AbortSignal` itself
+const abortReason = (signal: AbortSignal): unknown =>
+  signal.reason !== undefined
+    ? signal.reason
+    : Object.assign(new Error('The scroll was aborted'), { name: 'AbortError' })
+
+// Listens before calling `run`, as the first animation frame runs
+// synchronously and its `ease` or `onScrollChange` can abort the signal
+function abortable<T>(signal: AbortSignal, run: () => Promise<T>): Promise<T> {
+  if (signal.aborted) {
+    return Promise.reject(abortReason(signal))
+  }
+  let onAbort!: () => void
+  const aborted = new Promise<never>((_resolve, reject) => {
+    onAbort = () => reject(abortReason(signal))
+  })
+  signal.addEventListener('abort', onAbort)
+  const stopListening = () => signal.removeEventListener('abort', onAbort)
+  let done: Promise<T>
+  try {
+    done = run()
+  } catch (error) {
+    stopListening()
+    throw error
+  }
+  return Promise.race([done, aborted]).finally(stopListening)
 }
 
 const shouldSmoothScroll = (options: any): options is SmoothBehaviorOptions => {
   return (options && !options.behavior) || options.behavior === 'smooth'
 }
+
+const runSmoothScroll = (
+  target: Element,
+  overrides: SmoothBehaviorOptions
+): Promise<SmoothScrollAction[]> =>
+  // scroll-into-view-if-needed returns nothing, without calling `behavior`,
+  // for targets that aren't connected to the document
+  Promise.resolve(
+    scrollIntoView<Promise<SmoothScrollAction[]> | undefined>(target, {
+      ...overrides,
+      behavior: (actions) => {
+        // Collected with push rather than by spreading a reduce accumulator,
+        // which would copy the array for every action
+        const animations: Promise<SmoothScrollAction>[] = []
+        for (const { el, left, top } of actions) {
+          const startLeft = el.scrollLeft
+          const startTop = el.scrollTop
+          if (startLeft === left && startTop === top) {
+            continue
+          }
+
+          animations.push(
+            new Promise<SmoothScrollAction>((resolve) => {
+              smoothScroll(
+                el,
+                left,
+                top,
+                overrides.duration,
+                overrides.ease,
+                () =>
+                  resolve({
+                    el,
+                    left: [startLeft, left],
+                    top: [startTop, top],
+                  }),
+                overrides.onScrollChange,
+                overrides.signal
+              )
+            })
+          )
+        }
+        return Promise.all(animations)
+      },
+    })
+  ).then((actions) => actions || [])
 
 function scroll(
   target: Element,
@@ -142,47 +226,10 @@ function scroll(
 function scroll<T>(target: Element, options?: any) {
   const overrides = options || {}
   if (shouldSmoothScroll(overrides)) {
-    // scroll-into-view-if-needed returns nothing, without calling `behavior`,
-    // for targets that aren't connected to the document
-    const smooth = scrollIntoView<Promise<SmoothScrollAction[]> | undefined>(
-      target,
-      {
-        ...overrides,
-        behavior: (actions) => {
-          // Collected with push rather than by spreading a reduce accumulator,
-          // which would copy the array for every action
-          const animations: Promise<SmoothScrollAction>[] = []
-          for (const { el, left, top } of actions) {
-            const startLeft = el.scrollLeft
-            const startTop = el.scrollTop
-            if (startLeft === left && startTop === top) {
-              continue
-            }
-
-            animations.push(
-              new Promise<SmoothScrollAction>((resolve) => {
-                smoothScroll(
-                  el,
-                  left,
-                  top,
-                  overrides.duration,
-                  overrides.ease,
-                  () =>
-                    resolve({
-                      el,
-                      left: [startLeft, left],
-                      top: [startTop, top],
-                    }),
-                  overrides.onScrollChange
-                )
-              })
-            )
-          }
-          return Promise.all(animations)
-        },
-      }
-    )
-    return Promise.resolve(smooth).then((actions) => actions || [])
+    const { signal } = overrides
+    return signal
+      ? abortable(signal, () => runSmoothScroll(target, overrides))
+      : runSmoothScroll(target, overrides)
   }
 
   if (typeof overrides.behavior === 'function') {
