@@ -85,11 +85,16 @@ function smoothScroll(
   const scrollable = el
   const startX = el.scrollLeft
   const startY = el.scrollTop
-  const method = (x: number, y: number, elapsed: number, value: number) => {
+  const method = (
+    currentX: number,
+    currentY: number,
+    elapsed: number,
+    value: number
+  ) => {
     // @TODO use Element.scroll if it exists, as it is potentially better performing
     // use ceil to include the the fractional part of the number for the scrolling
-    const left = Math.ceil(x)
-    const top = Math.ceil(y)
+    const left = Math.ceil(currentX)
+    const top = Math.ceil(currentY)
 
     el.scrollLeft = left
     el.scrollTop = top
@@ -118,7 +123,7 @@ function smoothScroll(
   })
 }
 
-const shouldSmoothScroll = <T>(options: any): options is T => {
+const shouldSmoothScroll = (options: any): options is SmoothBehaviorOptions => {
   return (options && !options.behavior) || options.behavior === 'smooth'
 }
 
@@ -127,46 +132,45 @@ function scroll<T>(target: Element, options: CustomBehaviorOptions<T>): T
 function scroll(target: Element, options: StandardBehaviorOptions): void
 function scroll<T>(target: Element, options?: any) {
   const overrides = options || {}
-  if (shouldSmoothScroll<SmoothBehaviorOptions>(overrides)) {
+  if (shouldSmoothScroll(overrides)) {
     return scrollIntoView<Promise<SmoothScrollAction[]>>(target, {
       block: overrides.block,
       inline: overrides.inline,
       scrollMode: overrides.scrollMode,
       boundary: overrides.boundary,
       skipOverflowHiddenElements: overrides.skipOverflowHiddenElements,
-      behavior: (actions) =>
-        Promise.all(
-          actions.reduce<Promise<SmoothScrollAction>[]>(
-            (results, { el, left, top }) => {
-              const startLeft = el.scrollLeft
-              const startTop = el.scrollTop
-              if (startLeft === left && startTop === top) {
-                return results
-              }
+      behavior: (actions) => {
+        // Collected with push rather than by spreading a reduce accumulator,
+        // which would copy the array for every action
+        const animations: Promise<SmoothScrollAction>[] = []
+        for (const { el, left, top } of actions) {
+          const startLeft = el.scrollLeft
+          const startTop = el.scrollTop
+          if (startLeft === left && startTop === top) {
+            continue
+          }
 
-              return [
-                ...results,
-                new Promise<SmoothScrollAction>((resolve) => {
-                  return smoothScroll(
+          animations.push(
+            new Promise<SmoothScrollAction>((resolve) => {
+              smoothScroll(
+                el,
+                left,
+                top,
+                overrides.duration,
+                overrides.ease,
+                () =>
+                  resolve({
                     el,
-                    left,
-                    top,
-                    overrides.duration,
-                    overrides.ease,
-                    () =>
-                      resolve({
-                        el,
-                        left: [startLeft, left],
-                        top: [startTop, top],
-                      }),
-                    overrides.onScrollChange
-                  )
-                }),
-              ]
-            },
-            []
+                    left: [startLeft, left],
+                    top: [startTop, top],
+                  }),
+                overrides.onScrollChange
+              )
+            })
           )
-        ),
+        }
+        return Promise.all(animations)
+      },
     })
   }
 
