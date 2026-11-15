@@ -15,13 +15,19 @@ And while `scroll-into-view-if-needed` use the same default options as browsers 
 yarn add smooth-scroll-into-view-if-needed
 ```
 
-The UMD build is also available on [unpkg](https://unpkg.com/smooth-scroll-into-view-if-needed/umd/):
+The package is ESM only. In the browser you can load it from a CDN like [esm.sh](https://esm.sh):
 
 ```html
-<script src="https://unpkg.com/smooth-scroll-into-view-if-needed/umd/smooth-scroll-into-view-if-needed.min.js"></script>
+<script type="module">
+  import scrollIntoView from 'https://esm.sh/smooth-scroll-into-view-if-needed'
+</script>
 ```
 
-You can find the library on `window.scrollIntoView`.
+CommonJS code on Node.js 20.19+ or 22.12+ can still `require()` it, and the function is on `.default`:
+
+```js
+const { default: scrollIntoView } = require('smooth-scroll-into-view-if-needed')
+```
 
 ## Usage
 
