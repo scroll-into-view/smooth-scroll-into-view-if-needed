@@ -48,7 +48,7 @@ scrollIntoView(node, {
   inline: 'nearest',
 })
 
-// a promise is always returned to help reduce boilerplate
+// smooth and auto behaviors return a promise to help reduce boilerplate
 const sequence = async () => {
   const slide = document.getElementById('slide-3')
   // First smooth scroll to hero
@@ -69,6 +69,8 @@ Check the full API in [`scroll-into-view-if-needed`](https://github.com/scroll-i
 ### scrollIntoView(target, [options]) => Promise
 
 `scroll-into-view-if-needed` does not return anything, while this library will return a Promise that is resolved when all of the scrolling boxes are finished scrolling.
+
+With the default `smooth` behavior the Promise resolves to a `SmoothScrollAction[]`, one entry for each element that was scrolled, with the `[start, end]` of its `left` and `top`. It resolves to `[]` when there's nothing to scroll, or when the target isn't connected to the document. `auto` resolves to `undefined`, and a custom `behavior` function's return value is returned as is.
 
 > The ability to cancel animations will be added in a future version.
 

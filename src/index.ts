@@ -33,7 +33,7 @@ const now = () => {
   return memoizedNow()
 }
 
-type SmoothScrollAction = {
+export type SmoothScrollAction = {
   el: Element
   // [start, end] tuples of the distance animated
   left: [number, number]
@@ -54,17 +54,20 @@ type Context = {
 }
 function step(context: Context) {
   const time = now()
-  const elapsed = Math.min((time - context.startTime) / context.duration, 1)
-  // apply easing to elapsed time
-  const value = context.ease(elapsed)
+  const elapsed =
+    context.duration > 0
+      ? Math.min((time - context.startTime) / context.duration, 1)
+      : 1
+  // apply easing to elapsed time, ending at the destination even if a custom
+  // easing function doesn't return 1 for 1
+  const value = elapsed === 1 ? 1 : context.ease(elapsed)
 
   const currentX = context.startX + (context.x - context.startX) * value
   const currentY = context.startY + (context.y - context.startY) * value
 
   context.method(currentX, currentY, elapsed, value)
 
-  // scroll more if we have not reached our destination
-  if (currentX !== context.x || currentY !== context.y) {
+  if (elapsed < 1) {
     requestAnimationFrame(() => step(context))
   } else {
     // If nothing left to scroll lets fire the callback
@@ -127,54 +130,65 @@ const shouldSmoothScroll = (options: any): options is SmoothBehaviorOptions => {
   return (options && !options.behavior) || options.behavior === 'smooth'
 }
 
-function scroll(target: Element, options?: SmoothBehaviorOptions): Promise<any>
+function scroll(
+  target: Element,
+  options?: SmoothBehaviorOptions
+): Promise<SmoothScrollAction[]>
 function scroll<T>(target: Element, options: CustomBehaviorOptions<T>): T
-function scroll(target: Element, options: StandardBehaviorOptions): void
+function scroll(
+  target: Element,
+  options: StandardBehaviorOptions
+): Promise<void>
 function scroll<T>(target: Element, options?: any) {
   const overrides = options || {}
   if (shouldSmoothScroll(overrides)) {
-    return scrollIntoView<Promise<SmoothScrollAction[]>>(target, {
-      block: overrides.block,
-      inline: overrides.inline,
-      scrollMode: overrides.scrollMode,
-      boundary: overrides.boundary,
-      skipOverflowHiddenElements: overrides.skipOverflowHiddenElements,
-      behavior: (actions) => {
-        // Collected with push rather than by spreading a reduce accumulator,
-        // which would copy the array for every action
-        const animations: Promise<SmoothScrollAction>[] = []
-        for (const { el, left, top } of actions) {
-          const startLeft = el.scrollLeft
-          const startTop = el.scrollTop
-          if (startLeft === left && startTop === top) {
-            continue
-          }
+    // scroll-into-view-if-needed returns nothing, without calling `behavior`,
+    // for targets that aren't connected to the document
+    const smooth = scrollIntoView<Promise<SmoothScrollAction[]> | undefined>(
+      target,
+      {
+        ...overrides,
+        behavior: (actions) => {
+          // Collected with push rather than by spreading a reduce accumulator,
+          // which would copy the array for every action
+          const animations: Promise<SmoothScrollAction>[] = []
+          for (const { el, left, top } of actions) {
+            const startLeft = el.scrollLeft
+            const startTop = el.scrollTop
+            if (startLeft === left && startTop === top) {
+              continue
+            }
 
-          animations.push(
-            new Promise<SmoothScrollAction>((resolve) => {
-              smoothScroll(
-                el,
-                left,
-                top,
-                overrides.duration,
-                overrides.ease,
-                () =>
-                  resolve({
-                    el,
-                    left: [startLeft, left],
-                    top: [startTop, top],
-                  }),
-                overrides.onScrollChange
-              )
-            })
-          )
-        }
-        return Promise.all(animations)
-      },
-    })
+            animations.push(
+              new Promise<SmoothScrollAction>((resolve) => {
+                smoothScroll(
+                  el,
+                  left,
+                  top,
+                  overrides.duration,
+                  overrides.ease,
+                  () =>
+                    resolve({
+                      el,
+                      left: [startLeft, left],
+                      top: [startTop, top],
+                    }),
+                  overrides.onScrollChange
+                )
+              })
+            )
+          }
+          return Promise.all(animations)
+        },
+      }
+    )
+    return Promise.resolve(smooth).then((actions) => actions || [])
   }
 
-  return Promise.resolve(scrollIntoView<T>(target, options))
+  if (typeof overrides.behavior === 'function') {
+    return scrollIntoView<T>(target, overrides)
+  }
+  return Promise.resolve(scrollIntoView(target, overrides))
 }
 
 // re-assign here makes the flowtype generation work
