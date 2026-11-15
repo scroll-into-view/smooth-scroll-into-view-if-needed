@@ -47,16 +47,17 @@ export default defineConfig({
     entry: ['src/index.ts'],
     format: 'esm',
     platform: 'neutral',
-    // The targets that @sanity/pkg-utils previously resolved from its
-    // browserslist query (tsdown would otherwise target engines.node)
+    // ES2019-level targets so `?.` and `??` are transpiled for Webpack 4 and
+    // other older toolchains (these match the browserslist that 2.1.1 pinned for
+    // @sanity/pkg-utils). The `check:es` script fails the build if this regresses.
     target: [
-      'chrome109',
-      'edge154',
-      'firefox157',
-      'ios16',
-      'opera136',
-      'safari17',
-      'node22',
+      'chrome79',
+      'edge79',
+      'firefox72',
+      'ios13',
+      'opera66',
+      'safari13',
+      'node12',
     ],
     // Declarations come from Oxc (tsconfig enables isolatedDeclarations), so
     // no TypeScript install is needed

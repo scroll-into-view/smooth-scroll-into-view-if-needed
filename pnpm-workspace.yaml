@@ -4,6 +4,8 @@ catalog:
   vitest: 5.1.0
   '@vitest/coverage-v8': 5.1.0
 minimumReleaseAgeExclude:
+  - compute-scroll-into-view@3.2.2
+  - scroll-into-view-if-needed@3.2.1
   - '@voidzero-dev/vite-plus-core@1.6.0'
   - '@voidzero-dev/vite-plus-darwin-arm64@1.6.0'
   - '@voidzero-dev/vite-plus-darwin-x64@1.6.0'
