@@ -66,3 +66,4 @@ reports
 !rollup.config.js
 # jest-junit
 junit.xml
+.vitest/
