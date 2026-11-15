@@ -66,6 +66,9 @@
     }
   ],
   "sideEffects": false,
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
   "packageManager": "pnpm@12.18.0",
   "publishConfig": {
     "access": "public",
