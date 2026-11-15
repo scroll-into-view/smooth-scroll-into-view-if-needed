@@ -174,6 +174,6 @@ function scroll<T>(target: Element, options?: any) {
 }
 
 // re-assign here makes the flowtype generation work
-const smoothScrollIntoView = scroll
+const smoothScrollIntoView: typeof scroll = scroll
 
 export default smoothScrollIntoView
