@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed.git"
   },
-  "version": "2.1.0",
+  "version": "2.1.2",
   "type": "module",
   "exports": {
     ".": {
@@ -29,17 +29,19 @@
   ],
   "scripts": {
     "test": "vp test",
-    "build": "vp pack",
-    "prepublishOnly": "vp pack",
-    "release": "vp pack && changeset publish",
+    "build": "vp pack && pnpm run check:es",
+    "check:es": "es-check es2019 dist/index.cjs && es-check es2019 --module dist/index.js",
+    "prepublishOnly": "pnpm run build",
+    "release": "pnpm run build && changeset publish",
     "prepare": "vp config"
   },
   "dependencies": {
-    "scroll-into-view-if-needed": "^3.1.0"
+    "scroll-into-view-if-needed": "^3.2.1"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",
     "@changesets/cli": "^3.0.3",
+    "es-check": "^9.8.1",
     "jsdom": "^31.0.0",
     "vite-plus": "catalog:"
   },
@@ -74,8 +76,5 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "engines": {
-    "node": ">=26"
   }
 }
