@@ -1,4 +1,33 @@
+import browserslist from 'browserslist'
 import { defineConfig } from 'vite-plus'
+
+// tsdown doesn't read the `browserslist` field in package.json, so it gets the
+// oldest version of each browser that the field resolves to, in the
+// esbuild-style target format
+const esbuildNames: Record<string, string> = {
+  and_chr: 'chrome',
+  and_ff: 'firefox',
+  chrome: 'chrome',
+  edge: 'edge',
+  firefox: 'firefox',
+  ios_saf: 'ios',
+  opera: 'opera',
+  safari: 'safari',
+}
+const oldest = new Map<string, number>()
+for (const entry of browserslist()) {
+  const [name, version] = entry.split(' ')
+  const esbuildName = esbuildNames[name]
+  if (!esbuildName) {
+    throw new Error(`Map the browserslist name "${name}" to a tsdown target`)
+  }
+  // Ranges like "13.0-13.1" start with their oldest version
+  const number = parseFloat(version)
+  if (number < (oldest.get(esbuildName) ?? Infinity)) {
+    oldest.set(esbuildName, number)
+  }
+}
+const target = [...oldest].map(([name, version]) => `${name}${version}`)
 
 export default defineConfig({
   staged: {
@@ -47,21 +76,17 @@ export default defineConfig({
     entry: ['src/index.ts'],
     format: 'esm',
     platform: 'neutral',
-    // ES2019-level targets so `?.` and `??` are transpiled for Webpack 4 and
-    // other older toolchains (these match the browserslist that 2.1.1 pinned for
-    // @sanity/pkg-utils). The `check:es` script fails the build if this regresses.
-    target: [
-      'chrome79',
-      'edge79',
-      'firefox72',
-      'ios13',
-      'opera66',
-      'safari13',
-      'node12',
-    ],
+    // The browserslist baseline in package.json (Baseline 2019) keeps `?.` and
+    // `??` transpiled for Webpack 4 and other older toolchains. Its oldest
+    // browser, Edge 18, supports ES2017 syntax but not object rest/spread or
+    // optional catch binding, so `check:es` runs `es-check es2017` to enforce it.
+    // es-check's checkBrowser mode can't be used instead, as it treats Edge 18 as ES5
+    target,
     // Declarations come from Oxc (tsconfig enables isolatedDeclarations), so
-    // no TypeScript install is needed
-    dts: { generator: 'oxc', sourcemap: true },
+    // no TypeScript install is needed. They have no maps, as src/ isn't
+    // published for them to point at
+    dts: { generator: 'oxc' },
+    // Embeds src/index.ts in its sourcesContent
     sourcemap: true,
     minify: true,
     // tsdown writes `exports`, plus `main`, `module` and `types` for tools that predate `exports`

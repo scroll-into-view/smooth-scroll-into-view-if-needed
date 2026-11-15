@@ -18,13 +18,15 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
+  ],
+  "browserslist": [
+    "baseline 2019"
   ],
   "scripts": {
     "test": "vp test",
     "build": "vp pack && vp run check:es",
-    "check:es": "es-check es2019 --module dist/index.js",
+    "check:es": "es-check es2017 --module dist/index.js",
     "prepublishOnly": "vp run build",
     "release": "vp run build && changeset publish",
     "prepare": "vp config"
@@ -37,6 +39,7 @@
     "@changesets/changelog-github": "^1.0.1",
     "@changesets/cli": "^3.0.3",
     "@vitest/coverage-v8": "catalog:",
+    "browserslist": "^4.29.5",
     "es-check": "^9.8.1",
     "jsdom": "^31.0.0",
     "knip": "^6.45.0",
