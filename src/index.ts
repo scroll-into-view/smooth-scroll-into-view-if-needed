@@ -2,7 +2,11 @@ import scrollIntoView, {
   Options,
   StandardBehaviorOptions,
   CustomBehaviorOptions,
+  CustomScrollBehaviorCallback,
 } from 'scroll-into-view-if-needed'
+
+/** Where an element will be scrolled to, as computed by `scroll-into-view-if-needed` */
+export type ScrollAction = Parameters<CustomScrollBehaviorCallback>[0][number]
 
 export interface CustomEasing {
   (t: number): number
@@ -26,6 +30,12 @@ export type SmoothBehaviorOptions = Options & {
    * the signal's abort reason
    */
   signal?: AbortSignal
+  /**
+   * Called with the computed scroll positions before the animation starts.
+   * Return the actions to animate: leave elements out to skip them, or change
+   * `top` and `left` to scroll them somewhere else
+   */
+  beforeScroll?: (actions: ScrollAction[]) => ScrollAction[]
 }
 
 // Memoize so we're much more friendly to non-dom envs
@@ -179,10 +189,13 @@ const runSmoothScroll = (
     scrollIntoView<Promise<SmoothScrollAction[]> | undefined>(target, {
       ...overrides,
       behavior: (actions) => {
+        const planned = overrides.beforeScroll
+          ? overrides.beforeScroll(actions)
+          : actions
         // Collected with push rather than by spreading a reduce accumulator,
         // which would copy the array for every action
         const animations: Promise<SmoothScrollAction>[] = []
-        for (const { el, left, top } of actions) {
+        for (const { el, left, top } of planned) {
           const startLeft = el.scrollLeft
           const startTop = el.scrollTop
           if (startLeft === left && startTop === top) {

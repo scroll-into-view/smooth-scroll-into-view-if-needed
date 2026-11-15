@@ -105,6 +105,28 @@ This option deviates from `scroll-into-view-if-needed` in two ways.
 
 The options `auto` or `Function` behaves exactly like in `scroll-into-view-if-needed`.
 
+#### beforeScroll
+
+Type: `(actions: ScrollAction[]) => ScrollAction[]`
+
+Called with the computed `{ el, top, left }` scroll positions before the smooth scrolling starts, and returns the ones to animate. Leave elements out to keep them from scrolling, or change `top` and `left` to scroll them somewhere else. Unlike a custom `behavior` function you don't have to animate anything yourself.
+
+For example, to keep a fixed 50px header from covering the target:
+
+```js
+scrollIntoView(node, {
+  block: 'start',
+  beforeScroll: (actions) =>
+    actions.map((action) =>
+      action.el === document.scrollingElement
+        ? { ...action, top: action.top - 50 }
+        : action
+    ),
+})
+```
+
+For offsets like this one, setting [`scroll-margin-top`](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-margin-top) on the target in CSS works too, without any JavaScript.
+
 #### duration
 
 Type: `number`<br> Default: `600`
