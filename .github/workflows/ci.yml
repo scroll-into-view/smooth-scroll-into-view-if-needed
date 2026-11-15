@@ -23,6 +23,9 @@ jobs:
           node-version: lts
           cache: true
       - run: vp check
+      # Unused files, exports, and dependencies
+      - run: vp exec knip
+      # vp pack, then es-check verifies ES2019 output
       - run: vp run build
 
   test:
