@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/scroll-into-view/smooth-scroll-into-view-if-needed.git"
   },
-  "version": "2.1.2",
+  "version": "3.0.0",
   "type": "module",
   "exports": {
     ".": "./dist/index.js",
