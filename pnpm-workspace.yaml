@@ -26,3 +26,5 @@ peerDependencyRules:
   allowedVersions:
     vite: '*'
     vitest: '*'
+lockfile:
+  format: v13
